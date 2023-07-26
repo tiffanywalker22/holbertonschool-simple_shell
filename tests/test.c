@@ -45,8 +45,9 @@ int main(int argc, char **argv)
 		printf("%s", buffer);
 
 		token = strtok(buffer, " ");
-		while (token[i])
+		while (token != NULL)
 		{
+			printf("Token[%d] : %s", i, token + i);
 			printf("Token: %s\n", token);
 			token = strtok(NULL, " ");
 			i++;
