@@ -14,6 +14,12 @@ char * get_input_mal(void)
     buffer = (char *)malloc(sizeof(char *) * buffSize);
     getline(&buffer, &buffSize, stdin);
 
+    if (buffer == NULL)
+    {
+        free(buffer);
+        exit(EXIT_FAILURE);
+    }
+
     return (buffer);
 }
 
