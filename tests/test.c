@@ -47,10 +47,8 @@ int main(int argc, char **argv)
 		token = strtok(buffer, " ");
 		while (token != NULL)
 		{
-			printf("Token[%d] : %s", i, token + i);
 			printf("Token: %s\n", token);
 			token = strtok(NULL, " ");
-			i++;
 		}
 		// /* If user gives 3 inputs */
 		// if (argc > 10)

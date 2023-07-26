@@ -28,7 +28,7 @@ char * get_input_mal(void)
  *
  * Return: pointer to first token found, or NULL
  */
- char * gettokens(char *buffer)
+ char ** gettokens(char *buffer)
 {
     char *token;
     char **tokens = NULL;
@@ -37,9 +37,9 @@ char * get_input_mal(void)
     token = strtok(buffer, " ");
     while (token != NULL)
     {
-        tokens = realloc(tokens, (token_count + 1) * sizeof(char *));
+        tokens = realloc(tokens, (i + 1) * sizeof(char *));
         tokens[i] = strdup(token);
-        i++
+        i++;
 
         token = strtok(NULL, " ");    
     }

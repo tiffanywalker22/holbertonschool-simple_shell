@@ -12,9 +12,9 @@
 
 int main(int argc, char **argv)
 {
-    int flag = 1; /*Flag for start/stop */
+    int flag = 1, i = 0; /*Flag for start/stop */
     char *buffer;
-    char *token;
+    char **tokenArray;
 
     while (flag)
     {
@@ -22,6 +22,11 @@ int main(int argc, char **argv)
         buffer = get_input_mal();
         tokenArray = gettokens(buffer);
 
+        while (tokenArray[i] != NULL)
+        {
+            printf("Token[%d]: %s\n", i, tokenArray[i]);
+            i++;
+        }
        
 
         free(buffer);
