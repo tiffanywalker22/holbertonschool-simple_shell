@@ -1,0 +1,19 @@
+.\" Manpage for simple shell
+.\"
+.TH man 1 "July 26 2023" "1.0" "simple shell man page"
+.SH NAME
+._printf
+\- This is a simple shell
+.SH SYNOPSIS
+#include "main.h"
+
+
+.SH DESCRIPTION
+
+.SH SEE ALSO
+
+.SH BUGS
+If there is a bug, report to 6622@holbertonschool.com and 6690@holbertonschool.com
+
+.SH AUTHOR(S)
+Tiffany Walker and Ethan Zalta
