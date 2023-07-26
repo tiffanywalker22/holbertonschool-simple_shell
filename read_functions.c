@@ -25,8 +25,18 @@ char * get_input_mal(void)
  char * gettokens(char *buffer)
 {
     char *token;
+    char **tokens = NULL;
+    int i = 0;
 
     token = strtok(buffer, " ");
+    while (token != NULL)
+    {
+        tokens = realloc(tokens, (token_count + 1) * sizeof(char *));
+        tokens[i] = strdup(token);
+        i++
 
-return (token);
+        token = strtok(NULL, " ");    
+    }
+
+return (tokens);
 }
