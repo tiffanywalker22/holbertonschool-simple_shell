@@ -16,6 +16,9 @@ int main(int argc, char **argv)
 	char *buffer;
 	char **tokenArray;
 
+	if (!argv || argc < 2)
+		printf("No Inputs\n");
+
 	while (flag)
 	{
 		printf("%s\n", PROMPT);
