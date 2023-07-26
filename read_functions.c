@@ -24,5 +24,9 @@ char * get_input_mal(void)
  */
  char * gettokens(char *buffer)
 {
-    
+    char *token;
+
+    token = strtok(buffer, " ");
+
+return (token);
 }

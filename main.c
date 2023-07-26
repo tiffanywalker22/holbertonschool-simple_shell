@@ -13,14 +13,20 @@
 int main(int argc, char **argv)
 {
     int flag = 1; /*Flag for start/stop */
-    char* buffer;
+    char *buffer;
+    char *token;
 
     while (flag)
     {
         printf("%s\n", PROMPT);
         buffer = get_input_mal();
+        token = gettokens(buffer);
 
-        printf("%s", buffer);
+        while (token != NULL)
+        {
+            printf("token: %s\n", token);
+            token = strtok(NULL, " ");
+        }
 
         free(buffer);
 

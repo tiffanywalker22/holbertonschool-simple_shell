@@ -23,6 +23,6 @@
 /* function prototypes */
 
 char * get_input_mal(void);
-
+char * gettokens(char *buffer);
 
 #endif
