@@ -20,16 +20,12 @@ int main(int argc, char **argv)
     {
         printf("%s\n", PROMPT);
         buffer = get_input_mal();
-        token = gettokens(buffer);
+        tokenArray = gettokens(buffer);
 
-        while (token != NULL)
-        {
-            printf("token: %s\n", token);
-            token = strtok(NULL, " ");
-        }
+       
 
         free(buffer);
-
+        free(tokenArray);
         flag = 0;
     }
     return (0);
