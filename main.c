@@ -13,6 +13,7 @@
 int main(int argc, char **argv)
 {
     int flag = 1; /*Flag for start/stop */
+    char* buffer;
 
     while (flag)
     {

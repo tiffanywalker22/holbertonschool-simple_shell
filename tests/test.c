@@ -8,12 +8,12 @@
 /**
  * print_func - prints the inputs in a child process
  * age - age to print
- * name - name to print
+ * buffer - buffer to print
 */
 
-void print_func(char *name)
+void print_func(char *buffer)
 {
-	printf("Your first name is %s.\n", name);
+	printf("Your first buffer is %s.\n", buffer);
 }
 
 /**
@@ -24,27 +24,32 @@ void print_func(char *name)
 int main(int argc, char **argv)
 {
 	/*Declare variables*/
-	char *name, *token;
+	char *buffer, *token;
 	pid_t pid;
-	int flag = 1;
-	size_t len = 0;
+	int flag = 1, i = 0;
+	size_t len = 1024;
 	ssize_t lineSize = 0;
 
 	/*Loop*/
 	while (flag)
 	{
 		/*User Prompt*/
-		printf("Hello\nPlease type your first name, then press enter\n");
+		printf("Hello\nPlease type your first buffer, then press enter\n");
 
 		/*Store user input*/
-		lineSize = getline(&name, &len, stdin);
-		printf("You entered %s, which has %zu chars.\n", name, lineSize);
+		buffer = (char *)(malloc(sizeof(char *) * len));
+		lineSize = getline(&buffer, &len, stdin);
+		printf("You entered %s, which has %zu chars.\n", buffer, lineSize);
+		// buffer[] = buffer;
 
-		token = strtok(name, " ");
-		while (token != NULL)
+		printf("%s", buffer);
+
+		token = strtok(buffer, " ");
+		while (token[i])
 		{
 			printf("Token: %s\n", token);
-			token++;
+			token = strtok(NULL, " ");
+			i++;
 		}
 		// /* If user gives 3 inputs */
 		// if (argc > 10)
@@ -52,10 +57,10 @@ int main(int argc, char **argv)
 		// 	printf("Hey... you did it wrong...\n");
 		// 	exit(98);
 		// }
-		if (name == "exit")
+		if (buffer == "exit")
 			printf("1\n");
 
-		if (strcmp(name, "exit") == 0)
+		if (strcmp(buffer, "exit") == 0)
 		{
 			printf("They are equal");
 			flag = 0;
@@ -65,7 +70,7 @@ int main(int argc, char **argv)
 		/*Print answers*/
 		pid = fork();
 		// printf("You are %d years old.\n", age);
-		// printf("Your first name is %s.\n", name);
+		// printf("Your first buffer is %s.\n", buffer);
 		if (pid < 0) 
 		{
 			perror("Fork failed");
@@ -77,7 +82,7 @@ int main(int argc, char **argv)
 			printf("Child process executing...\n");
 			// Put the child process logic here
 			// ...
-			print_func(name);
+			print_func(buffer);
 			printf("Child process done.\n");
 		} 
 		else 
@@ -88,6 +93,9 @@ int main(int argc, char **argv)
 			printf("Parent process done waiting.\n");
 		}
 		printf("Your pid is: %ld\n", (long int)pid);
+
+		flag = 0;
+		free(buffer);
 	}
 	return (1);
 }
