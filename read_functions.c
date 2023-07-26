@@ -16,3 +16,13 @@ char * get_input_mal(void)
 
     return (buffer);
 }
+
+/**
+ * strtok - splits a string into tokens
+ *
+ * Return: pointer to first token found, or NULL
+ */
+ char * gettokens(char *buffer)
+{
+    
+}
