@@ -33,7 +33,7 @@ char **gettokens(char *buffer)
     char *token;
     char **tokens = NULL;
     int i = 0;
-    int tokenSize = 10; // Initial size for the tokens array
+    int tokenSize = 10; /* Initial size for the tokens array */
 
     tokens = malloc(tokenSize * sizeof(char *));
 

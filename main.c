@@ -34,6 +34,7 @@ int main(int argc, char **argv)
 			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
 		command = get_command(tokenArray);
+		printf("%s", command);
 
 		if (argc == 1)
 		{
