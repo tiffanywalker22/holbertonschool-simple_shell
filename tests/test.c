@@ -4,7 +4,9 @@
 #include <unistd.h>
 #include <stdbool.h>
 #include <sys/wait.h>
+#define MAX_CMD_LENGTH 100
 
+#define MAX_NUM_PARAMS 10
 /**
  * print_func - prints the inputs in a child process
  * age - age to print
