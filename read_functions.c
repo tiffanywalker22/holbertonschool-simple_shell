@@ -90,7 +90,7 @@ char **argv_tokenize(int argc, char **argv)
     char **tokens;
     int i;
 
-    tokens = (char **)malloc((argc - 1) * sizeof(char *)* 10);
+    tokens = (char **)malloc((argc) * sizeof(char *));
     if (tokens == NULL)
     {
         perror("malloc");
@@ -105,8 +105,8 @@ char **argv_tokenize(int argc, char **argv)
             perror("malloc");
             exit(EXIT_FAILURE);
         }
-    tokens[argc - 1] = NULL;
     }
+    tokens[argc - 1] = NULL;
     return (tokens);
 }
 
