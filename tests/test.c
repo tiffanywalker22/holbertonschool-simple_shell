@@ -98,3 +98,102 @@ int main(int argc, char **argv)
 	}
 	return (1);
 }
+void execArgsPiped(char **argv, int argc)
+{
+    // Tokenize the input command to extract individual commands and arguments
+    char *command;
+    char *commands[2];
+    int i = 0;
+    while ((command = strsep(&input, "|")) != NULL)
+    {
+        commands[i++] = command;
+    }
+
+    // Remove leading and trailing spaces from the commands
+    for (int j = 0; j < i; j++)
+    {
+        char *cmd = commands[j];
+        while (*cmd == ' ')
+        {
+            cmd++;
+        }
+
+        char *end = cmd + strlen(cmd) - 1;
+        while (*end == ' ' || *end == '\n')
+        {
+            *end = '\0';
+            end--;
+        }
+        commands[j] = cmd;
+    }
+
+    // Create a pipe and fork to handle the commands
+    int pipefd[2];
+    if (pipe(pipefd) < 0)
+    {
+        perror("Pipe could not be initialized");
+        return;
+    }
+
+    pid_t p1 = fork();
+    if (p1 < 0)
+    {
+        perror("Could not fork");
+        return;
+    }
+
+    if (p1 == 0)
+    {
+        // Child 1 executing...
+        // It only needs to write at the write end
+        close(pipefd[0]);
+        dup2(pipefd[1], STDOUT_FILENO);
+        close(pipefd[1]);
+
+        execlp(commands[0], commands[0], NULL); // Execute the first command
+        perror("Could not execute command");
+        exit(1);
+    }
+    else
+    {
+        // Parent executing
+        pid_t p2 = fork();
+        if (p2 < 0)
+        {
+            perror("Could not fork");
+            return;
+        }
+
+        if (p2 == 0)
+        {
+            // Child 2 executing...
+            // It only needs to read at the read end
+            close(pipefd[1]);
+            dup2(pipefd[0], STDIN_FILENO);
+            close(pipefd[0]);
+
+            execlp(commands[1], commands[1], NULL); // Execute the second command
+            perror("Could not execute command");
+            exit(1);
+        }
+        else
+        {
+            // parent executing, waiting for two children
+            wait(NULL);
+            wait(NULL);
+            close(pipefd[0]);
+            close(pipefd[1]);
+        }
+    }
+}
+
+int main(void)
+{
+    char input[256];
+    printf("Enter command: ");
+    if (fgets(input, sizeof(input), stdin) != NULL)
+    {
+        execArgsPiped(input);
+    }
+    return 0;
+}
