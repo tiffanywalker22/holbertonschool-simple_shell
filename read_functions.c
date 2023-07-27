@@ -30,22 +30,53 @@ char *get_input_mal(void)
  */
 char **gettokens(char *buffer)
 {
-	char *token;
-	char **tokens = NULL;
-	int i = 0;
+char *token;
+    char **tokens = NULL;
+    int i = 0;
+    int tokenSize = 10; // Initial size for the tokens array
 
-	token = strtok(buffer, " ");
-	while (token != NULL)
-	{
-		if (i == 0)
-			tokens = malloc(sizeof(char *));
-		else
-			tokens = realloc(tokens, (i + 1) * sizeof(char *));
-		tokens[i] = strdup(token);
-		i++;
-		token = strtok(NULL, " ");
-	}
-		free(token);
+    tokens = malloc(tokenSize * sizeof(char *));
 
-return (tokens);
+    if (tokens == NULL)
+    {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+
+    token = strtok(buffer, " ");
+    while (token != NULL)
+    {
+        tokens[i] = strdup(token);
+        i++;
+        token = strtok(NULL, " ");
+
+        if (i >= tokenSize)
+        {
+            tokenSize *= 2; // Double the tokenSize if needed
+            tokens = realloc(tokens, tokenSize * sizeof(char *));
+            if (tokens == NULL)
+            {
+                perror("realloc");
+                exit(EXIT_FAILURE);
+            }
+        }
+    }
+
+    tokens = realloc(tokens, (i + 1) * sizeof(char *)); // Resize to actual number of tokens + 1 for NULL
+
+    if (tokens == NULL)
+    {
+        perror("realloc");
+        exit(EXIT_FAILURE);
+    }
+
+    tokens[i] = NULL; // Add NULL as the last element to indicate the end of tokens
+
+    return (tokens);
 }
+
+
+
+
+
+
