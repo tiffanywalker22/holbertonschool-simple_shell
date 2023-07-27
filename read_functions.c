@@ -30,7 +30,7 @@ char *get_input_mal(void)
  */
 char **gettokens(char *buffer)
 {
-char *token;
+    char *token;
     char **tokens = NULL;
     int i = 0;
     int tokenSize = 10; // Initial size for the tokens array
@@ -75,6 +75,58 @@ char *token;
     return (tokens);
 }
 
+/**
+ * argv_tokenize - removes first token of argv
+ * 
+ * argv - arguments input
+ * 
+ * argc - count of arguments
+ * 
+ * Returns: pointer to array of tokens
+ */
+
+char **argv_tokenize(int argc, char **argv)
+{
+    char **tokens;
+    int i;
+
+    tokens = (char **)malloc((argc - 1) * sizeof(char *)* 10);
+    if (tokens == NULL)
+    {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+
+    for (i = 1; i < argc; i++)
+    {
+        tokens[i - 1] = strdup(argv[i]);
+        if (tokens[i - 1] == NULL)
+        {
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
+    tokens[argc - 1] = NULL;
+    }
+    return (tokens);
+}
+
+/**
+ * get_command - gets the first input for a command
+ * 
+ * @array: array of strings inputted
+ * 
+ * Return: returns a single character pointer
+ */
+
+char *get_command(char **array)
+{
+    char *command;
+
+    command = array[0];
+    printf("%s\n", command);
+
+    return (command);
+}
 
 
 

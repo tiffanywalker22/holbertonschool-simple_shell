@@ -13,29 +13,39 @@
 int main(int argc, char **argv)
 {
 	int flag = 1, i = 0; /*Flag for start/stop */
-	char *buffer;
+	char *buffer, *command;
 	char **tokenArray;
-
-	if (!argv || argc < 2)
-		printf("No Inputs\n");
 
 	while (flag)
 	{
-		printf("%s\n", PROMPT);
-		buffer = get_input_mal();
-		tokenArray = gettokens(buffer);
-		free(buffer);
-
-		while (tokenArray[i])
+		if (argc > 1)
 		{
-			printf("Token[%d]: %s\n", i, tokenArray[i]);
-			i++;
+			flag = 0;
+			tokenArray = argv_tokenize(argc, argv);
+		}
+		else
+		{
+			printf("%s\n", PROMPT);
+			buffer = get_input_mal();
+			tokenArray = gettokens(buffer);
 		}
 
 		for (i = 0; tokenArray[i]; i++)
-			free(tokenArray[i]);
+			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
-		free(tokenArray);
+		command = get_command(tokenArray);
+
+		if (argc == 1)
+		{
+			free(buffer);
+			for (i = 0; tokenArray[i]; i++)
+				free(tokenArray[i]);
+			free(tokenArray);
+		}
+		else
+		{
+			free(tokenArray);
+		}
 		flag = 0;
 	}
 	return (0);

@@ -24,5 +24,7 @@
 
 char *get_input_mal(void);
 char **gettokens(char *buffer);
+char *get_command(char **array);
+char **argv_tokenize(int argc, char **argv);
 
 #endif
