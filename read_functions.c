@@ -71,7 +71,7 @@ char **gettokens(char *buffer)
         exit(EXIT_FAILURE);
     }
 
-    tokens[i] = NULL; // Add NULL as the last element to indicate the end of tokens
+    tokens[i] = NULL; /* Add NULL as the last element to indicate the end of tokens */
 
     return (tokens);
 }
