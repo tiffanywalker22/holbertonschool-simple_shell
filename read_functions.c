@@ -52,7 +52,7 @@ char **gettokens(char *buffer)
 
         if (i >= tokenSize)
         {
-            tokenSize *= 2; // Double the tokenSize if needed
+            tokenSize *= 2; /* Double the tokenSize if needed */
             tokens = realloc(tokens, tokenSize * sizeof(char *));
             if (tokens == NULL)
             {
@@ -62,7 +62,8 @@ char **gettokens(char *buffer)
         }
     }
 
-    tokens = realloc(tokens, (i + 1) * sizeof(char *)); // Resize to actual number of tokens + 1 for NULL
+    /* Resize to actual number of tokens + 1 for NULL */
+    tokens = realloc(tokens, (i + 1) * sizeof(char *));
 
     if (tokens == NULL)
     {
