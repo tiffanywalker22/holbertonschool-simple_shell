@@ -10,7 +10,7 @@
  * Return: 0 on success?
 */
 
-int main(int argc, char **argv)
+void main(int argc, char **argv)
 {
 	int flag = 1, i = 0; /*Flag for start/stop */
 	char *buffer, *command;
@@ -18,6 +18,7 @@ int main(int argc, char **argv)
 
 	while (flag)
 	{
+		signal(SIGINT, sigintCall);
 		if (argc > 1)
 		{
 			flag = 0;
@@ -51,7 +52,7 @@ int main(int argc, char **argv)
 			}
 			free(tokenArray);
 		}
-		flag = 0;
+		flag = 1;
 	}
-	return (0);
+	// return (0);
 }
