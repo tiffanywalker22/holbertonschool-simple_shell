@@ -6,6 +6,11 @@
 #include <sys/wait.h>
 #include<sys/types.h>
 
+/**
+ * execArgsPiped - function where piped line is executed
+ *
+*/
+
 void execArgsPiped(char** parsed, char** parsedpipe)
 {
     // 0 is read end, 1 is write end
