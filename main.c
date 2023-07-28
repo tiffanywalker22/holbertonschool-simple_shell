@@ -10,11 +10,12 @@
  * Return: 0 on success?
 */
 
-void main(int argc, char **argv)
+int main(int argc, char **argv)
 {
 	int flag = 1, i = 0; /*Flag for start/stop */
 	char *buffer;
-	char **tokenArray, **command = NULL;
+	char **tokenArray; /* **command = NULL;*/
+
 
 	while (flag)
 	{
@@ -51,7 +52,7 @@ void main(int argc, char **argv)
                 printf("command[%d]: %s\n", i, command[i]);
             }
 
-            // Free command
+            /* Free command
             for (i = 0; command[i] != NULL; i++)
                 free(command[i]);
             free(command);
@@ -75,5 +76,5 @@ void main(int argc, char **argv)
 
 		flag = 0;
 	}
-	// return (0);
+	return (0);
 }
