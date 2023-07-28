@@ -128,7 +128,7 @@ char **get_command(char **array)
 {
     char **command = NULL;
     char BIN_DIR_PATH[256] = "/bin";
-    int i = 0;
+    int i = 0, flagCom = 0, j;
     char *path;
     DIR *dir;
     while (array[i] != NULL)
@@ -158,7 +158,7 @@ char **get_command(char **array)
                         exit(EXIT_FAILURE);
                     }
                     /* Copy the command and arguments to the command array */
-                    for (int j = 0; j <= i; j++)
+                    for (j = 0; j <= i; j++)
                     {
                         command[j] = strdup(array[j]);
                     }
