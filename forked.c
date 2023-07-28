@@ -18,7 +18,7 @@ int forkfunc (char **commands)
 			// Put the child process logic here
 			// ...
 			/*print_func(buffer); */
-           /* printf("\n &s \n", commands); */
+            printf("%s\n ", commands[0]);
 			printf("Child process done.\n");
 		} 
 		else 

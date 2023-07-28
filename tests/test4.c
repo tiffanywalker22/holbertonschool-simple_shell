@@ -16,7 +16,7 @@ int main(void)
     list[2] = strdup("a");
     list[3] = strdup("word");
 
-    printf("%c\n", list[0][1]);
+    printf("%s\n", list[0]);
 
     for (int i = 0; i < 4; i++) {
         free(list[i]);
