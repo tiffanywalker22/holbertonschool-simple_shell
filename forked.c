@@ -3,29 +3,28 @@ int forkfunc (char **commands)
 {
     int pid;
 
+	char cmd[] = "/bin/ls";
+	char * list[] = {"ls", "-la", NULL};
+
+
     pid = fork();
-		// printf("You are %d years old.\n", age);
-		// printf("Your first buffer is %s.\n", buffer);
 		if (pid < 0) 
 		{
 			perror("Fork failed");
 			return 1;
 		} 
-		else if (pid == 0) 
+		else if (pid == 0)
 		{
-			// Child process
+			/* Child process */
 			printf("Child process executing...\n");
-			// Put the child process logic here
-			// ...
-			/*print_func(buffer); */
-            printf("%s\n ", commands[0]);
+			execve(cmd, list, NULL);
 			printf("Child process done.\n");
 		} 
 		else 
 		{
-			// Parent process
+			/* Parent process */
 			printf("Parent process waiting for the child...\n");
-			wait(NULL); // Wait for the child process to terminate
+			wait(NULL); /* Wait for the child process to terminate */
 			printf("Parent process done waiting.\n");
 		}
 		printf("Your pid is: %ld\n", (long int)pid);
