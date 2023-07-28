@@ -39,7 +39,7 @@ void main(int argc, char **argv)
 		for (i = 0; tokenArray[i]; i++)
 			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
-		command = get_command(tokenArray);
+		/*command = get_command(tokenArray);
 		if (command == NULL)
         {
             printf("Command not found in the default path.\n");
@@ -55,8 +55,8 @@ void main(int argc, char **argv)
             for (i = 0; command[i] != NULL; i++)
                 free(command[i]);
             free(command);
-        }
-
+        }*/
+	forkfunc(tokenArray);
 		if (argc == 1)
 		{
 			free(buffer);

@@ -1,6 +1,8 @@
 #include "main.h"
 int forkfunc (char **commands)
 {
+    int pid;
+
     pid = fork();
 		// printf("You are %d years old.\n", age);
 		// printf("Your first buffer is %s.\n", buffer);
@@ -15,7 +17,8 @@ int forkfunc (char **commands)
 			printf("Child process executing...\n");
 			// Put the child process logic here
 			// ...
-			print_func(buffer);
+			/*print_func(buffer); */
+           /* printf("\n &s \n", commands); */
 			printf("Child process done.\n");
 		} 
 		else 
@@ -27,7 +30,5 @@ int forkfunc (char **commands)
 		}
 		printf("Your pid is: %ld\n", (long int)pid);
 
-		flag = 0;
-		free(buffer);
 	return (1);
 }
