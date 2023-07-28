@@ -14,7 +14,7 @@ char *get_input_mal(void)
 
 	buffer = (char *)malloc(sizeof(char *) * buffSize);
 	bytesRead = getline(&buffer, &buffSize, stdin);
-    if (bytesRead = -1)
+    if (bytesRead == -1)
     {
         free(buffer);
         return NULL;

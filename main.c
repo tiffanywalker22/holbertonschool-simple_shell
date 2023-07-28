@@ -28,8 +28,11 @@ void main(int argc, char **argv)
 		{
 			printf("%s\n", PROMPT);
 			buffer = get_input_mal();
+			if (buffer == NULL)
+			{
 			printf("\nReceived Ctrl+D. Exiting the program.\n");
             exit(0);
+			}
 			tokenArray = gettokens(buffer);
 		}
 
@@ -37,10 +40,22 @@ void main(int argc, char **argv)
 			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
 		command = get_command(tokenArray);
-		for (i = 0; command[i] != NULL; i++)
+		if (command == NULL)
+        {
+            printf("Command not found in the default path.\n");
+        }
+        else
+        {
+            for (i = 0; command[i] != NULL; i++)
             {
-                /*printf("command[%d]: %s\n", i, command[i]);*/
+                printf("command[%d]: %s\n", i, command[i]);
             }
+
+            // Free command
+            for (i = 0; command[i] != NULL; i++)
+                free(command[i]);
+            free(command);
+        }
 
 		if (argc == 1)
 		{
@@ -57,7 +72,8 @@ void main(int argc, char **argv)
 			}
 			free(tokenArray);
 		}
-		flag = 1;
+
+		flag = 0;
 	}
 	// return (0);
 }
