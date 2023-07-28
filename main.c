@@ -28,6 +28,8 @@ void main(int argc, char **argv)
 		{
 			printf("%s\n", PROMPT);
 			buffer = get_input_mal();
+			printf("\nReceived Ctrl+D. Exiting the program.\n");
+            exit(0);
 			tokenArray = gettokens(buffer);
 		}
 

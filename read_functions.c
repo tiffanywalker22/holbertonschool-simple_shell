@@ -10,9 +10,15 @@ char *get_input_mal(void)
 {
 	char *buffer;
 	size_t buffSize = BUFF_SIZE;
+    ssize_t bytesRead;
 
 	buffer = (char *)malloc(sizeof(char *) * buffSize);
-	getline(&buffer, &buffSize, stdin);
+	bytesRead = getline(&buffer, &buffSize, stdin);
+    if (bytesRead = -1)
+    {
+        free(buffer);
+        return NULL;
+    }
 
 	if (buffer == NULL)
 	{
