@@ -6,7 +6,7 @@
  * signal - Signals the call for end of function.
  */
 
-void sigintCall(int signal)
+void sigintCall()
 {
     printf("\nReceived Ctrl+D. Exiting the program.\n");
 

@@ -128,7 +128,7 @@ char **get_command(char **array)
 {
     char **command = NULL;
     char BIN_DIR_PATH[256] = "/bin";
-    int i = 0, flagCom = 0, j;
+    int i = 0, j;
     char *path;
     DIR *dir;
     while (array[i] != NULL)

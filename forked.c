@@ -2,10 +2,9 @@
 int forkfunc (char **commands)
 {
     int pid;
-
 	char cmd[] = "/bin/ls";
-	char * list[] = {"ls", "-la", NULL};
 
+	char * list[] = {"ls", NULL};
 
     pid = fork();
 		if (pid < 0) 
@@ -19,6 +18,7 @@ int forkfunc (char **commands)
 			printf("Child process executing...\n");
 			execve(cmd, list, NULL);
 			printf("Child process done.\n");
+			printf("%s\n", commands[0]);
 		} 
 		else 
 		{

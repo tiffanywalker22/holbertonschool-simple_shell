@@ -11,10 +11,10 @@ int main(void)
      char **list = (char **)malloc(4 * sizeof(char *));
 
     // Initialize each string in the array
-    list[0] = strdup("This");
-    list[1] = strdup("is");
-    list[2] = strdup("a");
-    list[3] = strdup("word");
+    list[0] = strdup("ls");
+    list[1] = strdup("-la");
+    list[2] = strdup(NULL);
+
 
     printf("%s\n", list[0]);
 

@@ -52,7 +52,7 @@ int main(int argc, char **argv)
                 printf("command[%d]: %s\n", i, command[i]);
             }
 
-            /* Free command
+             Free command
             for (i = 0; command[i] != NULL; i++)
                 free(command[i]);
             free(command);
