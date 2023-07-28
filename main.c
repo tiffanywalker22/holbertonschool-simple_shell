@@ -13,8 +13,8 @@
 void main(int argc, char **argv)
 {
 	int flag = 1, i = 0; /*Flag for start/stop */
-	char *buffer, *command;
-	char **tokenArray;
+	char *buffer;
+	char **tokenArray, **command = NULL;
 
 	while (flag)
 	{
@@ -37,7 +37,10 @@ void main(int argc, char **argv)
 			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
 		command = get_command(tokenArray);
-		printf("%s", command);
+		for (i = 0; command[i] != NULL; i++)
+            {
+                /*printf("command[%d]: %s\n", i, command[i]);*/
+            }
 
 		if (argc == 1)
 		{

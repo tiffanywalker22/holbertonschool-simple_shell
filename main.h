@@ -20,12 +20,13 @@
 #include <stdbool.h>
 #include <sys/wait.h>
 #include <signal.h>
+#include <dirent.h>
 
 /* function prototypes */
 
 char *get_input_mal(void);
 char **gettokens(char *buffer);
-char *get_command(char **array);
+char **get_command(char **array);
 char **argv_tokenize(int argc, char **argv);
 void sigintCall(int signal);
 
