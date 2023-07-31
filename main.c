@@ -12,20 +12,20 @@
 
 int main(int argc, char **argv)
 {
-	int flag = 1, i = 0; /*Flag for start/stop */
+	int flag = 1, i = 0, nonInterFlag = 0; /*Flag for start/stop */
 	char *buffer;
-	char **tokenArray; /* **command = NULL;*/
-
+	char **tokenArray, **command = NULL;
 
 	while (flag)
 	{
 		signal(SIGINT, sigintCall);
-		if (argc > 1)
+		if (argc > 1) /* Non-Interactive */
 		{
-			flag = 0;
-			tokenArray = argv_tokenize(argc, argv);
+			flag = (argc - 1);
+			if (nonInterFlag < 1)
+				tokenArray = argv_tokenize(argc, argv), nonInterFlag = 1;
 		}
-		else
+		else /* Interactive */
 		{
 			printf("%s\n", PROMPT);
 			buffer = get_input_mal();
@@ -36,28 +36,23 @@ int main(int argc, char **argv)
 			}
 			tokenArray = gettokens(buffer);
 		}
-
 		for (i = 0; tokenArray[i]; i++)
 			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
-		/*command = get_command(tokenArray);
+		command = get_command(tokenArray);
 		if (command == NULL)
         {
             printf("Command not found in the default path.\n");
         }
         else
         {
+			printf("Got here: else\n");
             for (i = 0; command[i] != NULL; i++)
             {
                 printf("command[%d]: %s\n", i, command[i]);
             }
-
-             Free command
-            for (i = 0; command[i] != NULL; i++)
-                free(command[i]);
-            free(command);
-        }*/
-	forkfunc(tokenArray);
+        }
+		forkfunc(command);
 		if (argc == 1)
 		{
 			free(buffer);
@@ -73,7 +68,10 @@ int main(int argc, char **argv)
 			}
 			free(tokenArray);
 		}
-
+		             /* Free command */
+		for (i = 0; command[i] != NULL; i++)
+			free(command[i]);
+		free(command);
 		flag = 0;
 	}
 	return (0);

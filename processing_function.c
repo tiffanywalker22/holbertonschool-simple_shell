@@ -1,12 +1,13 @@
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <stdbool.h>
-#include <sys/wait.h>
-#include <signal.h>
-#include <dirent.h>
+#include "main.h"
 
+/**
+ * slash_processor - takes input and removes bin to find command
+ * example - /bin/ls becomes ls
+ * 
+ * @slasher: input string to find command
+ * 
+ * Return: returns a string in command form
+ */
 char *slash_processor(char *slasher)
 {
     char ** tokenizedList;
@@ -26,7 +27,7 @@ char *slash_processor(char *slasher)
 
     while (tokenizer != NULL)
     {
-        if (i >= tokenSize - 1) // Check if we need to resize the array
+        if (i >= tokenSize - 1) /* Check if we need to resize the array */
         {
             tokenSize *= 2;
             tokenizedList = realloc(tokenizedList, tokenSize * sizeof(char*));
@@ -57,6 +58,14 @@ char *slash_processor(char *slasher)
     return (finalCom);
 }
 
+
+/**
+ * get_command - returns commands and subcommands until second command appears
+ * 
+ * @array: array of commands and subcommands
+ * 
+ * Return: returns an array of strings of command followed by subcommands
+ */
 char **get_command(char **array)
 {
     char **command = NULL, *path, BIN_DIR_PATH[256] = "/bin";
@@ -91,7 +100,7 @@ char **get_command(char **array)
             }
             closedir(dir);
         }
-        if (comFlag == 1) /* Copy the command and arguments to the command array */
+        if (comFlag <= 1) /* Copy the command and arguments to the command array */
         {
             printf("Copying array[%d]: %s\n", i, path);
             command[i] = strdup(path);
@@ -101,34 +110,4 @@ char **get_command(char **array)
         free(path);
     }
     return command;
-}
-
-int main(void)
-{
-    char *tokenArray[] = {"/usr/bin/ls", "-la", "echo"};
-    char **command;
-    char *finalCom;
-    int i = 0;
-
-    // finalCom = slash_processor(tokenArray[0]);
-    // printf("%s\n", finalCom);
-    // free(finalCom);
-
-    command = get_command(tokenArray);
-    // if (command == NULL)
-    // {
-    //     free(command);
-    //     return (-1);
-    // }
-
-    for (i = 0; command[i] != NULL; i++)
-    {
-        printf("Command[%d]: %s\n", i , command[i]);
-        free(command[i]);
-    }
-    free(command);
-
-
-
-    return(0);
 }
