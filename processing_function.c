@@ -135,9 +135,12 @@ char **tokenArraySub(char **array, int *counter)
         for (; array[i] != NULL; i++, j++)
         {
             temp[j] = strdup(array[i]);
+            printf("%s: %s", temp[j], array[i]);
             if (temp[j] == NULL)
+            {
             perror("malloc");
             exit(EXIT_FAILURE);
+            }
         }
         temp[j] = NULL;
         

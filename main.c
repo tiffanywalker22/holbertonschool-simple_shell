@@ -44,7 +44,7 @@ int main(int argc, char **argv)
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt);
 
 		for (i = 0; tokenArray[i]; i++)
-			printf("tokenArray[%d]: %s", i, tokenArray[i]);
+			printf("tokenArray[%d]: %s\n", i, tokenArray[i]);
 		if (command == NULL)
         {
             printf("Command not found in the default path.\n");
