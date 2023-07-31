@@ -117,9 +117,12 @@ char **tokenArraySub(char **array, int *counter, int *flag)
 {
     char **temp = NULL;
     int i, j = 0;
-    int tokenSize = 10;
+    int tokenSize = 0;
 
-    temp = malloc(tokenSize * sizeof(char *));
+    while (array[tokenSize] != NULL)
+        tokenSize++;
+    tokenSize = (tokenSize - *counter + 1);
+    temp = malloc((tokenSize + 1)  * sizeof(char *));
 
     if (temp == NULL)
     {
@@ -133,6 +136,7 @@ char **tokenArraySub(char **array, int *counter, int *flag)
         if (array[i] == NULL)
         {
             printf("this is to test if we get here");
+            free(temp);
             return (array);
         }
 
