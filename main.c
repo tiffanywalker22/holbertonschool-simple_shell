@@ -13,17 +13,19 @@
 int main(int argc, char **argv)
 {
 	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0; /*Flag for start/stop */
-	char *buffer;
-	char **tokenArray, **command = NULL;
+	char *buffer = NULL;
+	char **tokenArray = NULL, **command = NULL;
 
 	while (flag)
 	{
 		signal(SIGINT, sigintCall);
 		if (argc > 1) /* Non-Interactive */
 		{
-			flag = (argc - 1);
 			if (nonInterFlag < 1)
+			{
 				tokenArray = argv_tokenize(argc, argv), nonInterFlag = 1;
+				flag = (argc - 1);
+			}
 		}
 		else /* Interactive */
 		{
@@ -69,7 +71,7 @@ int main(int argc, char **argv)
 		{
 			if (flag == 0)
 			{
-				for (i = 0; i < argc - 1; i++)
+				for (i = 0; tokenArray[i]; i++)
 				{
 					free(tokenArray[i]);
 				}
@@ -80,7 +82,7 @@ int main(int argc, char **argv)
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
 		free(command);
-		flag = 0;
+		/* flag = 0; */
 	}
 	return (0);
 }

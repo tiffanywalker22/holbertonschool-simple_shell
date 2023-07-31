@@ -116,13 +116,13 @@ char **get_command(char **array, int *counter)
 char **tokenArraySub(char **array, int *counter, int *flag)
 {
     char **temp = NULL;
-    int i, j = 0;
-    int tokenSize = 0;
+    int i = 0, j = 0;
+    int tokenSize = 10;
 
-    while (array[tokenSize] != NULL)
+    /* while (array[tokenSize] != NULL)
         tokenSize++;
-    tokenSize = (tokenSize - *counter + 1);
-    temp = malloc((tokenSize + 1)  * sizeof(char *));
+    tokenSize = tokenSize - *counter + 1; */
+    temp = malloc((tokenSize) * sizeof(char *));
 
     if (temp == NULL)
     {
@@ -130,37 +130,38 @@ char **tokenArraySub(char **array, int *counter, int *flag)
         exit(EXIT_FAILURE);
     }
 
-        i = *counter;
-        *flag -= *counter;
-        printf("i = %d\n", i);
-        if (array[i] == NULL)
+    i = *counter;
+    printf("Flag: %d\n", *flag);
+    *flag -= *counter;
+    printf("Flag: %d\n", *flag);
+    printf("i = %d\n", i);
+    if (array[i] == NULL)
+    {
+        printf("this is to test if we get here");
+        free(temp);
+        return (array);
+    }
+    printf("Hello, lets check this\n");
+    for (; array[i] != NULL; i++, j++)
+    {
+        temp[j] = strdup(array[i]);
+        printf("%s: %s", temp[j], array[i]);
+        if (temp[j] == NULL)
         {
-            printf("this is to test if we get here");
-            free(temp);
-            return (array);
-        }
-
-        for (; array[i] != NULL; i++, j++)
-        {
-            temp[j] = strdup(array[i]);
-            printf("%s: %s", temp[j], array[i]);
-            if (temp[j] == NULL)
-            {
             perror("malloc");
             exit(EXIT_FAILURE);
-            }
         }
-        temp[j] = NULL;
-        
-        for (i = 0; array[i] != NULL; i++)
-        {
-            printf("testing pt two\n");
-            free(array[i]);
-        }
-        free(array);
+    }
+    temp[j] = NULL;
+    
+    for (i = 0; array[i]; i++)
+    {
+        printf("testing pt two\n");
+        printf("Freeing array[%d]", i);
+        free(array[i]);
+    }
+    free(array);
 
-        *counter = 0;
-        return (temp);
-
-        
+    *counter = 0;
+    return (temp);    
 }
