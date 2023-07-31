@@ -12,7 +12,7 @@
 
 int main(int argc, char **argv)
 {
-	int flag = 1, i = 0, nonInterFlag = 0; /*Flag for start/stop */
+	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0; /*Flag for start/stop */
 	char *buffer;
 	char **tokenArray, **command = NULL;
 
@@ -39,7 +39,12 @@ int main(int argc, char **argv)
 		for (i = 0; tokenArray[i]; i++)
 			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
-		command = get_command(tokenArray);
+		command = get_command(tokenArray, &arrayrmcnt);
+		printf("counter: %d\n", arrayrmcnt);
+		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt);
+
+		for (i = 0; tokenArray[i]; i++)
+			printf("tokenArray[%d]: %s", i, tokenArray[i]);
 		if (command == NULL)
         {
             printf("Command not found in the default path.\n");

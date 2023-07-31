@@ -26,9 +26,10 @@
 
 char *get_input_mal(void);
 char **gettokens(char *buffer);
-char **get_command(char **array);
+char **get_command(char **array, int *counter);
 char **argv_tokenize(int argc, char **argv);
 void sigintCall();
 int forkfunc (char **commands);
+char **tokenArraySub(char **array, int *counter);
 
 #endif

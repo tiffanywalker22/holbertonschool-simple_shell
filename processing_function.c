@@ -66,7 +66,7 @@ char *slash_processor(char *slasher)
  * 
  * Return: returns an array of strings of command followed by subcommands
  */
-char **get_command(char **array)
+char **get_command(char **array, int *counter)
 {
     char **command = NULL, *path, BIN_DIR_PATH[256] = "/bin";
     int i = 0, tokenSize = 10, comFlag = 0;
@@ -105,9 +105,49 @@ char **get_command(char **array)
             printf("Copying array[%d]: %s\n", i, path);
             command[i] = strdup(path);
             command[i + 1] = NULL; /* Set the last element to NULL */
+            *counter += 1;
         }
         i++;
         free(path);
     }
     return command;
+}
+
+char **tokenArraySub(char **array, int *counter)
+{
+    char **temp;
+    int i, j = 0;
+    int tokenSize = 10;
+
+    temp = malloc(tokenSize * sizeof(char *));
+
+    if (temp == NULL)
+    {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+
+        i = *counter;
+        if (array[i] == NULL)
+        printf("this is to test if we get here");
+            return (array);
+
+        for (; array[i] != NULL; i++, j++)
+        {
+            temp[j] = strdup(array[i]);
+            if (temp[j] == NULL)
+            perror("malloc");
+            exit(EXIT_FAILURE);
+        }
+        temp[j] = NULL;
+        
+        for (i = 0; array[i] != NULL; i++)
+        printf("testing pt two");
+            free(array[i]);
+        free(array);
+
+        *counter = 0;
+        return (temp);
+
+        
 }
