@@ -113,9 +113,9 @@ char **get_command(char **array, int *counter)
     return command;
 }
 
-char **tokenArraySub(char **array, int *counter)
+char **tokenArraySub(char **array, int *counter, int *flag)
 {
-    char **temp;
+    char **temp = NULL;
     int i, j = 0;
     int tokenSize = 10;
 
@@ -128,9 +128,13 @@ char **tokenArraySub(char **array, int *counter)
     }
 
         i = *counter;
+        *flag -= *counter;
+        printf("i = %d\n", i);
         if (array[i] == NULL)
-        printf("this is to test if we get here");
+        {
+            printf("this is to test if we get here");
             return (array);
+        }
 
         for (; array[i] != NULL; i++, j++)
         {
@@ -145,8 +149,10 @@ char **tokenArraySub(char **array, int *counter)
         temp[j] = NULL;
         
         for (i = 0; array[i] != NULL; i++)
-        printf("testing pt two");
+        {
+            printf("testing pt two\n");
             free(array[i]);
+        }
         free(array);
 
         *counter = 0;

@@ -30,6 +30,6 @@ char **get_command(char **array, int *counter);
 char **argv_tokenize(int argc, char **argv);
 void sigintCall();
 int forkfunc (char **commands);
-char **tokenArraySub(char **array, int *counter);
+char **tokenArraySub(char **array, int *counter, int *flag);
 
 #endif

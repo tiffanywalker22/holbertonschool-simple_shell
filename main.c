@@ -41,7 +41,7 @@ int main(int argc, char **argv)
 
 		command = get_command(tokenArray, &arrayrmcnt);
 		printf("counter: %d\n", arrayrmcnt);
-		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt);
+		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
 
 		for (i = 0; tokenArray[i]; i++)
 			printf("tokenArray[%d]: %s\n", i, tokenArray[i]);
@@ -67,11 +67,14 @@ int main(int argc, char **argv)
 		}
 		else
 		{
-			for (i = 0; i < argc - 1; i++)
+			if (flag == 0)
 			{
-				free(tokenArray[i]);
+				for (i = 0; i < argc - 1; i++)
+				{
+					free(tokenArray[i]);
+				}
+				free(tokenArray);
 			}
-			free(tokenArray);
 		}
 		             /* Free command */
 		for (i = 0; command[i] != NULL; i++)
