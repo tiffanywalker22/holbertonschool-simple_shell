@@ -25,7 +25,7 @@
 /* function prototypes */
 
 char *get_input_mal(void);
-char **gettokens(char *buffer);
+char **gettokens(char *buffer, int *flag);
 char **get_command(char **array, int *counter);
 char **argv_tokenize(int argc, char **argv);
 void sigintCall();

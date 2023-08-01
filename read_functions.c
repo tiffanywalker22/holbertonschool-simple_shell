@@ -34,14 +34,14 @@ char *get_input_mal(void)
  *
  * Return: pointer to first token found, or NULL
  */
-char **gettokens(char *buffer)
+char **gettokens(char *buffer, int *flag)
 {
     char *token;
     char **tokens = NULL;
     int i = 0;
     int tokenSize = 10; /* Initial size for the tokens array */
 
-    tokens = malloc(tokenSize * sizeof(char *));
+    tokens = malloc(tokenSize * sizeof(char *)), *flag = 0;
 
     if (tokens == NULL)
     {
@@ -49,11 +49,11 @@ char **gettokens(char *buffer)
         exit(EXIT_FAILURE);
     }
 
-    token = strtok(buffer, " ");
+    token = strtok(buffer, " \n\t");
     while (token != NULL)
     {
         tokens[i] = strdup(token);
-        i++;
+        i++, *flag += 1;
         token = strtok(NULL, " ");
 
         if (i >= tokenSize)
@@ -67,7 +67,6 @@ char **gettokens(char *buffer)
             }
         }
     }
-
     /* Resize to actual number of tokens + 1 for NULL */
     tokens = realloc(tokens, (i + 1) * sizeof(char *));
 
