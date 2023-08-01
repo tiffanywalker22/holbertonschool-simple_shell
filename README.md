@@ -40,7 +40,7 @@ Description of how the shell works
 <hr>
 
 **Authors**<br>
-<a href="https://github.com/tiffanywalker22">Tiffany Walker</a> <br>
+<a href="https://github.com/O-01">Sammy Ansari</a> <br>
 <a href="https://github.com/Zal-atan">Ethan Zalta</a> <br>
 
 
