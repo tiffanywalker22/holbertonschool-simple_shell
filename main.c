@@ -66,6 +66,8 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
             exit(0);
 			}
 			tokenArray = gettokens(buffer, &flag);
+			if (tokenArray == NULL)
+				exit(EXIT_SUCCESS);
 		}
 		/* for (i = 0; tokenArray[i]; i++)
 			printf("Token[%d]: %s\n", i, tokenArray[i]); */
