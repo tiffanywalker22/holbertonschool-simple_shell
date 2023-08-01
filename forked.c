@@ -5,7 +5,7 @@ int forkfunc (char **commands)
 	char cmd[256] = "/bin/";
 
 	strcat(cmd, commands[0]);
-	printf("This is the new cmd: %s\n", cmd);
+	/* printf("This is the new cmd: %s\n", cmd); */
 
 	/* char * list[] = {"ls", NULL}; */
 
@@ -18,19 +18,19 @@ int forkfunc (char **commands)
 		else if (pid == 0)
 		{
 			/* Child process */
-			printf("Child process executing...\n");
+			/* printf("Child process executing...\n"); */
 			execve(cmd, commands, NULL);
-			printf("Child process done.\n");
-			printf("%s\n", commands[0]);
+			/* printf("Child process done.\n"); */
+			/* printf("%s\n", commands[0]); */
 		} 
 		else 
 		{
 			/* Parent process */
-			printf("Parent process waiting for the child...\n");
+			/* printf("Parent process waiting for the child...\n"); */
 			wait(NULL); /* Wait for the child process to terminate */
-			printf("Parent process done waiting.\n");
+			/* printf("Parent process done waiting.\n"); */
 		}
-		printf("Your pid is: %ld\n", (long int)pid);
+		/* printf("Your pid is: %ld\n", (long int)pid); */
 
 	return (1);
 }
