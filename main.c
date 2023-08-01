@@ -59,7 +59,7 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 		{
 			buffer = get_input_mal();
 			nonInterFlag = 1;
-			/*printf("Buffer:%s\n", buffer); */
+			/* printf("Buffer:%s\n", buffer);  */
 			if (buffer == NULL)
 			{
 			printf("\nReceived Ctrl+D. Exiting the program.\n");
@@ -73,19 +73,19 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 		command = get_command(tokenArray, &arrayrmcnt);
 		/* printf("counter: %d\n", arrayrmcnt); */
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
-		for (i = 0; tokenArray[i]; i++)
-			/* printf("tokenArray[%d]: %s\n", i, tokenArray[i]); */
-		/* if (command == NULL)
+		/* for (i = 0; tokenArray[i]; i++)
+			printf("tokenArray[%d]: %s\n", i, tokenArray[i]);
+		if (command == NULL)
         {
             printf("Command not found in the default path.\n");
-        } */
-       /* else
+        }
+       else
         {
 			printf("Got here: else\n");
             for (i = 0; command[i] != NULL; i++)
             {
-                printf("command[%d]: %s\n", i, command[i]);
-            } 
+                printf("command[%d]: %s\n", i, command[i]); 
+            }
         } */
 		forkfunc(command);
 		for (i = 0; command[i] != NULL; i++)

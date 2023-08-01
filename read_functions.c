@@ -49,12 +49,12 @@ char **gettokens(char *buffer, int *flag)
         exit(EXIT_FAILURE);
     }
 
-    token = strtok(buffer, " \n\t");
+    token = strtok(buffer, " \n\r\t");
     while (token != NULL)
     {
         tokens[i] = strdup(token);
         i++, *flag += 1;
-        token = strtok(NULL, " ");
+        token = strtok(NULL, " \n\r\t");
 
         if (i >= tokenSize)
         {

@@ -5,9 +5,10 @@ int forkfunc (char **commands)
 	char cmd[256] = "/bin/";
 
 	strcat(cmd, commands[0]);
-	/* printf("This is the new cmd: %s\n", cmd); */
+	/*printf("This is the new cmd: %s\n", cmd); */
 
-	/* char * list[] = {"ls", NULL}; */
+	/*for (; commands[i]; i++)
+		printf("In the Fork function, Command[%d]: --%s--", i, commands[i]); */
 
     pid = fork();
 		if (pid < 0) 

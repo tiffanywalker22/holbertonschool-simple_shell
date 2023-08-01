@@ -15,7 +15,7 @@ char *slash_processor(char *slasher)
     char *inputString = strdup(slasher);
     int i = 0, tokenSize = 10;
 
-    /* printf("Bin command recognized: Tokenizing %s", slasher); */
+    /* ./hshprintf("Bin command recognized: Tokenizing %s", slasher); */
     tokenizedList = malloc(tokenSize * sizeof(char*));
     if (tokenizedList == NULL)
     {
@@ -23,7 +23,7 @@ char *slash_processor(char *slasher)
         exit(EXIT_FAILURE);
     }
 
-    tokenizer = strtok(inputString, "/");
+    tokenizer = strtok(inputString, " /\n\t\r");
 
     while (tokenizer != NULL)
     {
@@ -40,7 +40,7 @@ char *slash_processor(char *slasher)
 
         tokenizedList[i] = strdup(tokenizer);
         i++;
-        tokenizer = strtok(NULL, "/");
+        tokenizer = strtok(NULL, " ");
     }
     tokenizedList[i] = NULL;
 
@@ -82,27 +82,30 @@ char **get_command(char **array, int *counter)
     {
         /* If the first character is ‘/’, search only for the last part */
         if (array[i][0] == '/')
+        {
             path = slash_processor(array[i]);
+        }
         else
             path = strdup(array[i]);
+        /* printf("Path = ---%s---\n", path); */
         dir = opendir(BIN_DIR_PATH);
         if (dir != NULL)
         {
             struct dirent *entry;
-            /* printf("%d\n", comFlag); */
+           /* printf("%d\n", comFlag); */
             while ((entry = readdir(dir)) != NULL)
             {
                 if (strcmp(entry->d_name, path) == 0)
                 {
                     comFlag ++;
-                    /* printf("Matching command found: %s\n", entry->d_name); */
+                   /* printf("Matching command found: %s\n", entry->d_name); */
                 }
             }
             closedir(dir);
         }
         if (comFlag <= 1) /* Copy the command and arguments to the command array */
         {
-            /* printf("Copying array[%d]: %s\n", i, path); */
+            /* printf("Copying array[%d]: %s\n", i, path);  */
             command[i] = strdup(path);
             command[i + 1] = NULL; /* Set the last element to NULL */
             *counter += 1;
@@ -145,7 +148,7 @@ char **tokenArraySub(char **array, int *counter, int *flag)
     for (; array[i] != NULL; i++, j++)
     {
         temp[j] = strdup(array[i]);
-        printf("%s: %s", temp[j], array[i]);
+        /* printf("%s: %s\n", temp[j], array[i]); */
         if (temp[j] == NULL)
         {
             perror("malloc");
