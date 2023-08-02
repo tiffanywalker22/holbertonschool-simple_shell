@@ -99,7 +99,7 @@ char **gettokens(char *buffer, int *flag)
         }
     }
 
-    if (!tokens[0])
+    if (!token)
     {
         free(buffer);
         free(tokens);
