@@ -58,6 +58,38 @@ char *slash_processor(char *slasher)
     return (finalCom);
 }
 
+char **get_paths(void)
+{
+    extern char **environ;
+    int i, tokenSize = 20;
+    char **paths = NULL;
+    char *token = NULL, *pathline = NULL;
+
+    paths = (malloc(tokenSize * sizeof(char *)));
+    if (paths == NULL)
+    {
+        perror("malloc");
+        exit(EXIT_FAILURE);
+    }
+    for (i = 0; environ[i] != NULL; i++)
+    {
+        if (strncmp(environ[i], "PATH", strlen("PATH")) == 0 && environ[i][strlen("PATH")] == '=')
+            pathline = environ[i] + strlen("PATH") + 1;
+    }
+    token = strtok(pathline, ":");
+    printf("token: %s\n", token);
+    paths[0] = "/bin";
+    paths[1] = "/";
+    for (i = 2; token!= NULL; i++)
+    {
+        paths[i] = strdup(token);
+        token = strtok(NULL, ":");
+    }
+    for (i = 0; paths[i] != NULL; i++)
+        printf("paths[%d]: %s\n", i, paths[i]);
+
+    return(paths);
+}
 
 /**
  * get_command - returns commands and subcommands until second command appears
@@ -69,8 +101,13 @@ char *slash_processor(char *slasher)
 char **get_command(char **array, int *counter)
 {
     char **command = NULL, *path, BIN_DIR_PATH[256] = "/bin";
+    char **pathArray = NULL;
     int i = 0, tokenSize = 10, comFlag = 0;
     DIR *dir;
+
+    pathArray = get_paths();
+    for (i = 0; pathArray[i] != NULL; i++)
+        printf("pathArray[%d]: %s\n", i, pathArray[i]);
 
     command = malloc(tokenSize * sizeof(char*));
     if (command == NULL)
