@@ -81,6 +81,13 @@ char **gettokens(char *buffer, int *flag)
     }
 
     token = strtok(buffer, " \n\r\t");
+    
+    if (!token)
+    {
+        free(buffer);
+        free(tokens);
+        exit(0);
+    }
     while (token != NULL)
     {   
         tokens[i] = strdup(token);
@@ -99,12 +106,6 @@ char **gettokens(char *buffer, int *flag)
         }
     }
 
-    if (!token)
-    {
-        free(buffer);
-        free(tokens);
-        exit(0);
-    }
     /* Resize to actual number of tokens + 1 for NULL */
     tokens = realloc(tokens, (i + 1) * sizeof(char *));
 
