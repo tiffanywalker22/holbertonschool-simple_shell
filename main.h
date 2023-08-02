@@ -28,10 +28,11 @@
 char *get_input_inter(void);
 char *get_input_non_inter(void);
 char **gettokens(char *buffer, int *flag);
-char **get_command(char **array, int *counter);
+char **get_command(char **array, int *counter, char **pathArray, char *specificPath);
 char **argv_tokenize(int argc, char **argv);
 void sigintCall();
 int forkfunc (char **commands);
 char **tokenArraySub(char **array, int *counter, int *flag);
+char **get_paths(void);
 
 #endif

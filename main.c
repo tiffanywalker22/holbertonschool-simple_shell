@@ -3,6 +3,10 @@
 void argv_path(char **tokenArray, char **command, int argc, char **argv)
 {
 	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0;
+	char **pathArray = NULL, *specificPath = NULL;
+
+	printf("This is the interactive path\n");
+	pathArray = get_paths();
 
 	/* printf("This is the argv path\n"); */
 	while (flag)
@@ -15,7 +19,7 @@ void argv_path(char **tokenArray, char **command, int argc, char **argv)
 		/* for (i = 0; tokenArray[i]; i++)
 			printf("Token[%d]: %s\n", i, tokenArray[i]); */
 		
-		command = get_command(tokenArray, &arrayrmcnt);
+		command = get_command(tokenArray, &arrayrmcnt, pathArray, specificPath);
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
 
 		/* for (i = 0; tokenArray[i]; i++)
@@ -51,6 +55,10 @@ void argv_path(char **tokenArray, char **command, int argc, char **argv)
 void non_inter_path(char **tokenArray, char **command, char *buffer)
 {
 	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0;
+	char **pathArray = NULL, *specificPath = NULL;
+
+	printf("This is the interactive path\n");
+	pathArray = get_paths();
 
 	/* printf("This is the REAL non-interactive path\n"); */
 	while (flag)
@@ -72,7 +80,8 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 		/* for (i = 0; tokenArray[i]; i++)
 			printf("Token[%d]: %s\n", i, tokenArray[i]); */
 
-		command = get_command(tokenArray, &arrayrmcnt);
+		command = get_command(tokenArray, &arrayrmcnt, pathArray, specificPath);
+		printf("Specific Path: %s", specificPath);
 		/* printf("counter: %d\n", arrayrmcnt); */
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
 		/* for (i = 0; tokenArray[i]; i++)
@@ -107,8 +116,10 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 void interactive_path(char **tokenArray, char **command, char *buffer)
 {
 	int flag = 1, i = 0, arrayrmcnt = 0;
+	char **pathArray = NULL, *specificPath = NULL;
 
 	printf("This is the interactive path\n");
+	pathArray = get_paths();
 	while (flag)
 	{
 		printf("%s\n", PROMPT);
@@ -123,7 +134,7 @@ void interactive_path(char **tokenArray, char **command, char *buffer)
 		for (i = 0; tokenArray[i]; i++)
 			printf("Token[%d]: %s\n", i, tokenArray[i]);
 
-		command = get_command(tokenArray, &arrayrmcnt);
+		command = get_command(tokenArray, &arrayrmcnt, pathArray, specificPath);
 		printf("counter: %d\n", arrayrmcnt);
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
 

@@ -98,16 +98,11 @@ char **get_paths(void)
  * 
  * Return: returns an array of strings of command followed by subcommands
  */
-char **get_command(char **array, int *counter)
+char **get_command(char **array, int *counter, char **pathArray, char *specificPath)
 {
-    char **command = NULL, *path, BIN_DIR_PATH[256] = "/bin";
-    char **pathArray = NULL;
-    int i = 0, tokenSize = 10, comFlag = 0;
+    char **command = NULL, *currentArg = NULL; /* BIN_DIR_PATH[256] = "/bin"; */
+    int i = 0, j = 0, tokenSize = 10, comFlag = 0, stopDirFlag = 0;
     DIR *dir;
-
-    pathArray = get_paths();
-    for (i = 0; pathArray[i] != NULL; i++)
-        printf("pathArray[%d]: %s\n", i, pathArray[i]);
 
     command = malloc(tokenSize * sizeof(char*));
     if (command == NULL)
@@ -115,40 +110,50 @@ char **get_command(char **array, int *counter)
             perror("malloc");
             exit(EXIT_FAILURE);
         }
-    while (array[i] != NULL && comFlag < 2)
+    i = 0;    
+    while (array[i] && comFlag < 2)
     {
         /* If the first character is ‘/’, search only for the last part */
         if (array[i][0] == '/')
         {
-            path = slash_processor(array[i]);
+            currentArg = slash_processor(array[i]);
         }
         else
-            path = strdup(array[i]);
-        /* printf("Path = ---%s---\n", path); */
-        dir = opendir(BIN_DIR_PATH);
-        if (dir != NULL)
+            currentArg = strdup(array[i]);
+        for (j = 0, stopDirFlag = 0; pathArray[j] != NULL && stopDirFlag == 0; j++)
         {
-            struct dirent *entry;
-           /* printf("%d\n", comFlag); */
-            while ((entry = readdir(dir)) != NULL)
+            printf("Trying PathArray[%d]: %s\n", j, pathArray[j]);
+            dir = opendir(pathArray[j]);
+            if (dir != NULL)
             {
-                if (strcmp(entry->d_name, path) == 0)
+                struct dirent *entry;
+                printf("Going into this loop\n");
+            /* printf("%d\n", comFlag); */
+                while ((entry = readdir(dir)) != NULL)
                 {
-                    comFlag ++;
-                   /* printf("Matching command found: %s\n", entry->d_name); */
+                    /* printf("%s\n", entry->d_name); */
+                    if (strcmp(entry->d_name, currentArg) == 0)
+                    {
+                        specificPath = strdup(pathArray[j]);
+                        printf("Specific Path: %s\n",specificPath);
+                        comFlag ++;
+                        stopDirFlag = 1;
+                        break;
+                    /* printf("Matching command found: %s\n", entry->d_name); */
+                    }
                 }
+                closedir(dir);
             }
-            closedir(dir);
         }
         if (comFlag <= 1) /* Copy the command and arguments to the command array */
         {
-            /* printf("Copying array[%d]: %s\n", i, path);  */
-            command[i] = strdup(path);
+            printf("Copying array[%d]: %s\n", i, currentArg);
+            command[i] = strdup(currentArg);
             command[i + 1] = NULL; /* Set the last element to NULL */
             *counter += 1;
         }
         i++;
-        free(path);
+        free(currentArg);
     }
     return command;
 }
