@@ -8,25 +8,32 @@
 
 char *get_input_mal(void)
 {
-	char *buffer;
-	size_t buffSize = BUFF_SIZE;
+	char *buffer = NULL, *all_lines = NULL;
+	size_t buffSize = 0;
     ssize_t bytesRead;
 
-	buffer = (char *)malloc(sizeof(char *) * buffSize);
-	bytesRead = getline(&buffer, &buffSize, stdin);
-    if (bytesRead == -1)
+    all_lines = (char *)(malloc(sizeof(char *) * BUFF_SIZE));
+    if (all_lines == NULL)
     {
+        perror("Allocation failed for all_lines");
+        exit(EXIT_FAILURE);
+    }
+    all_lines[0] = '\0';
+	while ((bytesRead = getline(&buffer, &buffSize, stdin)) != -1)
+    {
+        strcat(all_lines, buffer);
+    }
+    if (bytesRead == -1 && !feof(stdin))
+    {
+        perror("getline failed");
         free(buffer);
+        free(all_lines);
         return NULL;
     }
 
-	if (buffer == NULL)
-	{
-		free(buffer);
-		exit(EXIT_FAILURE);
-	}
+    free(buffer);
 
-	return (buffer);
+	return (all_lines);
 }
 
 /**
