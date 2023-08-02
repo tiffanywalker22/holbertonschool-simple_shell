@@ -57,7 +57,7 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 	{
 		if (nonInterFlag < 1)
 		{
-			buffer = get_input_mal();
+			buffer = get_input_non_inter();
 			nonInterFlag = 1;
 			/* printf("Buffer:%s\n", buffer);  */
 			if (buffer == NULL)
@@ -112,7 +112,7 @@ void interactive_path(char **tokenArray, char **command, char *buffer)
 	while (flag)
 	{
 		printf("%s\n", PROMPT);
-		buffer = get_input_mal();
+		buffer = get_input_inter();
 		printf("Buffer:%s\n", buffer);
 		if (buffer == NULL)
 		{

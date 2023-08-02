@@ -1,16 +1,40 @@
 #include "main.h"
 
+char *get_input_inter(void)
+{
+	char *buffer;
+	size_t buffSize = BUFF_SIZE;
+    ssize_t bytesRead;
+
+	buffer = (char *)malloc(sizeof(char *) * buffSize);
+	bytesRead = getline(&buffer, &buffSize, stdin);
+    if (bytesRead == -1)
+    {
+        free(buffer);
+        return NULL;
+    }
+
+	if (buffer == NULL)
+	{
+		free(buffer);
+		exit(EXIT_FAILURE);
+	}
+
+	return (buffer);
+}
+
 /**
  * get_input_mal - gets input from stdin
  *
  * Return: Returns input from stdin
 */
 
-char *get_input_mal(void)
+char *get_input_non_inter(void)
 {
 	char *buffer = NULL, *all_lines = NULL;
 	size_t buffSize = 0;
     ssize_t bytesRead;
+
 
     all_lines = (char *)(malloc(sizeof(char *) * BUFF_SIZE));
     if (all_lines == NULL)
@@ -32,11 +56,11 @@ char *get_input_mal(void)
     }
 
     free(buffer);
-
 	return (all_lines);
 }
 
 /**
+ * 
  * strtok - splits a string into tokens
  *
  * Return: pointer to first token found, or NULL
@@ -58,7 +82,7 @@ char **gettokens(char *buffer, int *flag)
 
     token = strtok(buffer, " \n\r\t");
     while (token != NULL)
-    {
+    {   
         tokens[i] = strdup(token);
         i++, *flag += 1;
         token = strtok(NULL, " \n\r\t");
@@ -73,6 +97,12 @@ char **gettokens(char *buffer, int *flag)
                 exit(EXIT_FAILURE);
             }
         }
+    }
+
+    if (!tokens[0])
+    {
+        free(tokens);
+        exit(0);
     }
     /* Resize to actual number of tokens + 1 for NULL */
     tokens = realloc(tokens, (i + 1) * sizeof(char *));

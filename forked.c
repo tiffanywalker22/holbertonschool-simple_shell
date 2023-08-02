@@ -4,6 +4,7 @@ int forkfunc (char **commands)
     int pid;
 	char cmd[256] = "/bin/";
 
+	printf("Commands[0]: %s", commands[0]);
 	strcat(cmd, commands[0]);
 	/*printf("This is the new cmd: %s\n", cmd); */
 
