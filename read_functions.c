@@ -67,7 +67,7 @@ char *get_input_non_inter(void)
  */
 char **gettokens(char *buffer, int *flag)
 {
-    char *token;
+    char *token = NULL;
     char **tokens = NULL;
     int i = 0;
     int tokenSize = 10; /* Initial size for the tokens array */
