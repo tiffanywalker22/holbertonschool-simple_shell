@@ -101,6 +101,7 @@ char **gettokens(char *buffer, int *flag)
 
     if (!tokens[0])
     {
+        free(buffer);
         free(tokens);
         exit(0);
     }
