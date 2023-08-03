@@ -158,7 +158,7 @@ int main(int argc, char **argv)
 {
 	char *buffer = NULL;
 	char **tokenArray = NULL, **command = NULL;
-	int isInteractive;
+	int isInteractive = 0;
 
 	isInteractive = isatty(STDIN_FILENO);
 	if (argc > 1) /* ARGV Non-Interactive */
