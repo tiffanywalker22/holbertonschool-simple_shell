@@ -4,13 +4,14 @@
  * sigintCall - Calls the end of the function with control d or c
  *
  * signal - Signals the call for end of function.
+ * @e: input integer from system call
  */
 
-void sigintCall(void)
+void sigintCall(int e)
 {
 
 	/* Call Frees if need to */
-
+    printf("End of Function called: %d", e);
 	exit(0);
 }
 
