@@ -42,11 +42,11 @@ char *buffer, char **pathArray)
 			free(tokenArray[i]);
 	}
 	free(tokenArray);
-	if (pathArray[i])
-	{
-		for (i = 2; pathArray[i]; i++)
-			free(pathArray[i]);
-	}
+	/* if (pathArray[i])
+	{ */
+	for (i = 0; pathArray[i]; i++)
+		free(pathArray[i]);
+	/* } */
 	free(pathArray);
 
 	exit(0);

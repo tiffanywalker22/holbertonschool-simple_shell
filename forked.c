@@ -17,21 +17,20 @@ int forkfunc(char **commands, char *specificPath)
 	strcat(cmd, commands[0]);
 
 	pid = fork();
-		if (pid < 0)
-		{
-			perror("Fork failed");
-			return (1);
-		}
-		else if (pid == 0)
-		{
-			/* Child process */
-			execve(cmd, commands, NULL);
-		}
-		else
-		{
-			/* Parent process */
-			wait(NULL);
-		}
-
+	if (pid < 0)
+	{
+		perror("Fork failed");
+		return (1);
+	}
+	else if (pid == 0)
+	{
+		/* Child process */
+		execve(cmd, commands, NULL);
+	}
+	else
+	{
+		/* Parent process */
+		wait(NULL);
+	}
 	return (1);
 }

@@ -38,7 +38,7 @@ void argv_path(char **tokenArray, char **command, int argc, char **argv)
 			{
 				free(tokenArray[i]);
 			}
-			for (i = 2; pathArray[i]; i++)
+			for (i = 0; pathArray[i]; i++)
 				free(pathArray[i]);
 			free(pathArray);
 			free(tokenArray);
@@ -87,7 +87,7 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 			for (i = 0; tokenArray[i]; i++)
 				free(tokenArray[i]);
 			free(tokenArray);
-			for (i = 2; pathArray[i]; i++)
+			for (i = 0; pathArray[i]; i++)
 				free(pathArray[i]);
 			free(pathArray);
 			exit(EXIT_SUCCESS);
