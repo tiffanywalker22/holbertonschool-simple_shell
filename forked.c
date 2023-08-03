@@ -9,10 +9,13 @@
 int forkfunc (char **commands)
 {
     int pid;
-	char cmd[256] = "/bin/";
+	char cmd[256] = "";
+	printf("Specific Path: %s\n", specificPath);
 
+	strcat(cmd, specificPath);
+	strcat(cmd, "/");
 	strcat(cmd, commands[0]);
-	/*printf("This is the new cmd: %s\n", cmd); */
+	printf("This is the new cmd: %s\n", cmd);
 
 	/*for (; commands[i]; i++)
 		printf("In the Fork function, Command[%d]: --%s--", i, commands[i]); */

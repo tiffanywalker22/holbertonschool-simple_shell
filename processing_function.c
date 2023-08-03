@@ -91,6 +91,7 @@ char **get_paths(void)
     for (i = 0; paths[i] != NULL; i++)
         printf("paths[%d]: %s\n", i, paths[i]);
 
+    free(token);
     return(paths);
 }
 
@@ -113,7 +114,6 @@ char **get_command(char **array, int *counter, char **pathArray, char *specificP
             perror("malloc");
             exit(EXIT_FAILURE);
         }
-    i = 0;    
     while (array[i] && comFlag < 2)
     {
         /* If the first character is ‘/’, search only for the last part */
