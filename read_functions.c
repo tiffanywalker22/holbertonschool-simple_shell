@@ -1,5 +1,11 @@
 #include "main.h"
 
+/*
+* get_input_inter - gets input for interactive
+*
+* Return: returns input
+*/
+
 char *get_input_inter(void)
 {
 	char *buffer;
@@ -62,7 +68,9 @@ char *get_input_non_inter(void)
 /**
  * 
  * strtok - splits a string into tokens
- *
+ * 
+ * @buffer: temp storage for token
+ * @flag: signal to show conditions have been met
  * Return: pointer to first token found, or NULL
  */
 char **gettokens(char *buffer, int *flag)
@@ -81,7 +89,7 @@ char **gettokens(char *buffer, int *flag)
     }
 
     token = strtok(buffer, " \n\r\t");
-    
+
     if (!token)
     {
         free(buffer);
@@ -123,9 +131,9 @@ char **gettokens(char *buffer, int *flag)
 /**
  * argv_tokenize - removes first token of argv
  * 
- * argv - arguments input
+ * @argv - arguments input
  * 
- * argc - count of arguments
+ * @argc - count of arguments
  * 
  * Returns: pointer to array of tokens
  */

@@ -57,7 +57,10 @@ char *slash_processor(char *slasher)
 
     return (finalCom);
 }
-
+/*
+* get_paths - getting all potential paths
+*
+*/
 char **get_paths(void)
 {
     extern char **environ;
@@ -157,6 +160,14 @@ char **get_command(char **array, int *counter, char **pathArray, char *specificP
     }
     return command;
 }
+
+/*
+* tokenArraySub - subtract tokens from the front of tokenArray
+*
+* @array: temp storage for token
+* 
+* return: the stored token
+*/
 
 char **tokenArraySub(char **array, int *counter, int *flag)
 {

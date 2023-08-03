@@ -1,3 +1,10 @@
+/*
+*forkfunc - forks functions
+* @commands: new commands to input
+* Return: returns 1 on success
+*/
+
+
 #include "main.h"
 int forkfunc (char **commands)
 {
