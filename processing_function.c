@@ -149,7 +149,7 @@ char **specificPath)
 	}
 	while (array[i] && comFlag < 2)
 	{
-		if (array[i][0] == '/')  /* If first char ‘/’, copy only last part */
+		if (array[i][0] == '/' || array[i][0] == '.')
 			currentArg = slash_processor(array[i]);
 		else
 			currentArg = strdup(array[i]);
