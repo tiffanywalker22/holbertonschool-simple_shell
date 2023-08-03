@@ -1,12 +1,13 @@
 /*
 *forkfunc - forks functions
 * @commands: new commands to input
+* @specificPath: path for current command
 * Return: returns 1 on success
 */
 
 
 #include "main.h"
-int forkfunc (char **commands)
+int forkfunc (char **commands, char *specificPath)
 {
     int pid;
 	char cmd[256] = "";

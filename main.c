@@ -135,7 +135,7 @@ void interactive_path(char **tokenArray, char **command, char *buffer)
 		if (newInputFlag < 1)
 		{
 			printf("\nGoing INNNN\n");
-			buffer = get_input_non_inter();
+			buffer = get_input_inter();
 			printf("\nGoing INNNN4\n");
 			newInputFlag = 1;
 			printf("\nGoing INNNN5\n");

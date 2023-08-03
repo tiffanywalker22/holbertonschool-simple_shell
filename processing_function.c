@@ -102,7 +102,7 @@ char **get_paths(void)
  * 
  * Return: returns an array of strings of command followed by subcommands
  */
-char **get_command(char **array, int *counter, char **pathArray, char *specificPath)
+char **get_command(char **array, int *counter, char **pathArray, char **specificPath)
 {
     char **command = NULL, *currentArg = NULL; /* BIN_DIR_PATH[256] = "/bin"; */
     int i = 0, j = 0, tokenSize = 10, comFlag = 0, stopDirFlag = 0;
@@ -137,8 +137,8 @@ char **get_command(char **array, int *counter, char **pathArray, char *specificP
                     /* printf("%s\n", entry->d_name); */
                     if (strcmp(entry->d_name, currentArg) == 0)
                     {
-                        specificPath = strdup(pathArray[j]);
-                        printf("Specific Path: %s\n",specificPath);
+                         *specificPath = strdup(pathArray[j]);
+                        /* printf("Specific Path: %s\n", *specificPath); */
                         comFlag ++;
                         stopDirFlag = 1;
                         break;
