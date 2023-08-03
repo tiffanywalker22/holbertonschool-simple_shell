@@ -75,6 +75,8 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 				exit(EXIT_SUCCESS);
 		}
 		command = get_command(tokenArray, &arrayrmcnt, pathArray, &specificPath);
+		if (!command[0] || (strcmp(command[0], "exit") == 0))
+			normalExit(command, tokenArray, buffer, pathArray);
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
 		forkfunc(command, specificPath);
 		for (i = 0; command[i] != NULL; i++)
