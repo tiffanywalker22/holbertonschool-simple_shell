@@ -70,7 +70,7 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
 			{
 			exit(0);
 			}
-			tokenArray = gettokens(buffer, &flag);
+			tokenArray = gettokens(buffer, &flag, pathArray);
 			if (tokenArray == NULL)
 				exit(EXIT_SUCCESS);
 		}
@@ -121,7 +121,7 @@ void interactive_path(char **tokenArray, char **command, char *buffer)
 			newInputFlag = 1;
 			if (buffer == NULL)
 				exit(0);
-			tokenArray = gettokens(buffer, &flag);
+			tokenArray = gettokens(buffer, &flag, pathArray);
 			if (tokenArray == NULL)
 				exit(EXIT_SUCCESS);
 		}

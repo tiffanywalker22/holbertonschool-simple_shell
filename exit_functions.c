@@ -33,21 +33,22 @@ char *buffer, char **pathArray)
 	{
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
+		free(command);
 	}
-	free(command);
-	free(buffer);
+	if (buffer)
+		free(buffer);
 	if (tokenArray[0])
 	{
 		for (i = 0; tokenArray[i]; i++)
 			free(tokenArray[i]);
+		free(tokenArray);
 	}
-	free(tokenArray);
-	/* if (pathArray[i])
-	{ */
-	for (i = 0; pathArray[i]; i++)
-		free(pathArray[i]);
-	/* } */
-	free(pathArray);
+	if (pathArray[i])
+	{
+		for (i = 0; pathArray[i]; i++)
+			free(pathArray[i]);
+		free(pathArray);
+	}
 
 	exit(0);
 }

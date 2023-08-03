@@ -27,7 +27,7 @@
 
 char *get_input_inter(void);
 char *get_input_non_inter(void);
-char **gettokens(char *buffer, int *flag);
+char **gettokens(char *buffer, int *flag, char **pathArray);
 char **get_command(char **array, int *counter,
 char **pathArray, char **specificPath);
 char **argv_tokenize(int argc, char **argv);

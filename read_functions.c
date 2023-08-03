@@ -72,12 +72,10 @@ char *get_input_non_inter(void)
  * @flag: signal to show conditions have been met
  * Return: pointer to first token found, or NULL
  */
-char **gettokens(char *buffer, int *flag)
+char **gettokens(char *buffer, int *flag, char **pathArray)
 {
-	char *token = NULL;
-	char **tokens = NULL;
-	int i = 0;
-	int tokenSize = 10; /* Initial size for the tokens array */
+	char *token = NULL, **tokens = NULL;
+	int i = 0, tokenSize = 10;
 
 	tokens = malloc(tokenSize * sizeof(char *)), *flag = 0;
 	if (tokens == NULL)
@@ -88,8 +86,10 @@ char **gettokens(char *buffer, int *flag)
 	token = strtok(buffer, " \n\r\t");
 	if (!token)
 	{
-		free(buffer);
-		free(tokens);
+		free(buffer), free(tokens);
+		for (i = 0; pathArray[i] != NULL; i++)
+			free(pathArray[i]);
+		free(pathArray);
 		exit(0);
 	}
 	while (token != NULL)
