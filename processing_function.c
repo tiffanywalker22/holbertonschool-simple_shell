@@ -81,6 +81,8 @@ char **get_paths(void)
 	}
 	paths[0] = strdup("/bin");
 	paths[1] = strdup("./");
+    paths[2] = strdup("../");
+    paths[3] = strdup("../../");
 	if (pathline != NULL)
 	{
 		token = strtok(pathline, ":");
@@ -90,8 +92,7 @@ char **get_paths(void)
 			token = strtok(NULL, ":");
 		}
 	}
-
-	return (paths);
+    return (paths);
 }
 
 
