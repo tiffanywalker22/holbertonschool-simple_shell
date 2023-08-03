@@ -8,7 +8,6 @@
 
 void sigintCall()
 {
-    printf("\nReceived Ctrl+D. Exiting the program.\n");
 
     /* Call Frees if need to */
 
@@ -19,8 +18,6 @@ void normalExit(char **command, char *specificPath, char **tokenArray,
  char *buffer, char **pathArray)
 {
     int i = 0;
-
-    printf("\nExit Call received. Exiting....\n");
 
     /* Call Frees if need to */
     if (command[0])

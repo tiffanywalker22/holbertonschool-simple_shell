@@ -11,15 +11,10 @@ int forkfunc (char **commands, char *specificPath)
 {
     int pid;
 	char cmd[256] = "";
-	printf("Specific Path: %s\n", specificPath);
 
 	strcat(cmd, specificPath);
 	strcat(cmd, "/");
 	strcat(cmd, commands[0]);
-	printf("This is the new cmd: %s\n", cmd);
-
-	/*for (; commands[i]; i++)
-		printf("In the Fork function, Command[%d]: --%s--", i, commands[i]); */
 
     pid = fork();
 		if (pid < 0) 
@@ -30,19 +25,13 @@ int forkfunc (char **commands, char *specificPath)
 		else if (pid == 0)
 		{
 			/* Child process */
-			/* printf("Child process executing...\n"); */
 			execve(cmd, commands, NULL);
-			/* printf("Child process done.\n"); */
-			/* printf("%s\n", commands[0]); */
 		} 
 		else 
 		{
 			/* Parent process */
-			/*printf("Parent process waiting for the child...\n"); */
-			wait(NULL); /* Wait for the child process to terminate */
-			/*printf("Parent process done waiting.\n");*/
+			wait(NULL);
 		}
-		/*printf("Your pid is: %ld\n", (long int)pid); */
 
 	return (1);
 }

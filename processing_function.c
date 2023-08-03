@@ -15,16 +15,13 @@ char *slash_processor(char *slasher)
     char *inputString = strdup(slasher);
     int i = 0, tokenSize = 10;
 
-    /* ./hshprintf("Bin command recognized: Tokenizing %s", slasher); */
     tokenizedList = malloc(tokenSize * sizeof(char*));
     if (tokenizedList == NULL)
     {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
-
     tokenizer = strtok(inputString, " /\n\t\r");
-
     while (tokenizer != NULL)
     {
         if (i >= tokenSize - 1) /* Check if we need to resize the array */
@@ -37,21 +34,17 @@ char *slash_processor(char *slasher)
                 exit(EXIT_FAILURE);
             }
         }
-
         tokenizedList[i] = strdup(tokenizer);
         i++;
         tokenizer = strtok(NULL, " ");
     }
     tokenizedList[i] = NULL;
-
     for (i = 0; tokenizedList[i] != NULL; i++)
     {
         if (tokenizedList[i + 1] == NULL)
             finalCom = strdup(tokenizedList[i]);
-        /* printf("%s\n", tokenizedList[i]); */
         free(tokenizedList[i]);
     }
-    /*printf("finalCom = %s\n", finalCom); */
     free(tokenizedList);
     free(inputString);
 
@@ -80,7 +73,6 @@ char **get_paths(void)
             pathline = environ[i] + strlen("PATH") + 1;
     }
     token = strtok(pathline, ":");
-    printf("token: %s\n", token);
     paths[0] = "/bin";
     paths[1] = "/";
     for (i = 2; token!= NULL; i++)
@@ -88,8 +80,6 @@ char **get_paths(void)
         paths[i] = strdup(token);
         token = strtok(NULL, ":");
     }
-    for (i = 0; paths[i] != NULL; i++)
-        printf("paths[%d]: %s\n", i, paths[i]);
 
     free(token);
     return(paths);
@@ -116,33 +106,22 @@ char **get_command(char **array, int *counter, char **pathArray, char **specific
         }
     while (array[i] && comFlag < 2)
     {
-        /* If the first character is ‘/’, search only for the last part */
-        if (array[i][0] == '/')
-        {
+       if (array[i][0] == '/')  /* If first char ‘/’, copy only last part */
             currentArg = slash_processor(array[i]);
-        }
         else
             currentArg = strdup(array[i]);
         for (j = 0, stopDirFlag = 0; pathArray[j] != NULL && stopDirFlag == 0; j++)
         {
-            printf("Trying PathArray[%d]: %s\n", j, pathArray[j]);
             dir = opendir(pathArray[j]);
             if (dir != NULL)
             {
                 struct dirent *entry;
-                printf("Going into this loop\n");
-            /* printf("%d\n", comFlag); */
                 while ((entry = readdir(dir)) != NULL)
                 {
-                    /* printf("%s\n", entry->d_name); */
                     if (strcmp(entry->d_name, currentArg) == 0)
                     {
-                         *specificPath = strdup(pathArray[j]);
-                        /* printf("Specific Path: %s\n", *specificPath); */
-                        comFlag ++;
-                        stopDirFlag = 1;
+                        *specificPath = strdup(pathArray[j]), comFlag ++, stopDirFlag = 1;
                         break;
-                    /* printf("Matching command found: %s\n", entry->d_name); */
                     }
                 }
                 closedir(dir);
@@ -150,7 +129,6 @@ char **get_command(char **array, int *counter, char **pathArray, char **specific
         }
         if (comFlag <= 1) /* Copy the command and arguments to the command array */
         {
-            printf("Copying array[%d]: %s\n", i, currentArg);
             command[i] = strdup(currentArg);
             command[i + 1] = NULL; /* Set the last element to NULL */
             *counter += 1;
@@ -175,9 +153,6 @@ char **tokenArraySub(char **array, int *counter, int *flag)
     int i = 0, j = 0;
     int tokenSize = 10;
 
-    /* while (array[tokenSize] != NULL)
-        tokenSize++;
-    tokenSize = tokenSize - *counter + 1; */
     temp = malloc((tokenSize) * sizeof(char *));
 
     if (temp == NULL)
@@ -187,21 +162,15 @@ char **tokenArraySub(char **array, int *counter, int *flag)
     }
 
     i = *counter;
-    /* printf("Flag: %d\n", *flag); */
     *flag -= *counter;
-    /* printf("Flag: %d\n", *flag);
-    printf("i = %d\n", i); */
     if (array[i] == NULL)
     {
-        /* printf("this is to test if we get here"); */
         free(temp);
         return (array);
     }
-    /* printf("Hello, lets check this\n"); */
     for (; array[i] != NULL; i++, j++)
     {
         temp[j] = strdup(array[i]);
-        /* printf("%s: %s\n", temp[j], array[i]); */
         if (temp[j] == NULL)
         {
             perror("malloc");
@@ -211,11 +180,7 @@ char **tokenArraySub(char **array, int *counter, int *flag)
     temp[j] = NULL;
     
     for (i = 0; array[i]; i++)
-    {
-        /*printf("testing pt two\n");
-        printf("Freeing array[%d]", i); */
         free(array[i]);
-    }
     free(array);
 
     *counter = 0;

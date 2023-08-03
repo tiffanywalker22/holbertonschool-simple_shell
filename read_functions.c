@@ -81,15 +81,12 @@ char **gettokens(char *buffer, int *flag)
     int tokenSize = 10; /* Initial size for the tokens array */
 
     tokens = malloc(tokenSize * sizeof(char *)), *flag = 0;
-
     if (tokens == NULL)
     {
         perror("malloc");
         exit(EXIT_FAILURE);
     }
-
     token = strtok(buffer, " \n\r\t");
-
     if (!token)
     {
         free(buffer);
@@ -98,10 +95,8 @@ char **gettokens(char *buffer, int *flag)
     }
     while (token != NULL)
     {   
-        tokens[i] = strdup(token);
-        i++, *flag += 1;
+        tokens[i] = strdup(token), i++, *flag += 1;
         token = strtok(NULL, " \n\r\t");
-
         if (i >= tokenSize)
         {
             tokenSize *= 2; /* Double the tokenSize if needed */
@@ -113,18 +108,7 @@ char **gettokens(char *buffer, int *flag)
             }
         }
     }
-
-    /* Resize to actual number of tokens + 1 for NULL */
-    tokens = realloc(tokens, (i + 1) * sizeof(char *));
-
-    if (tokens == NULL)
-    {
-        perror("realloc");
-        exit(EXIT_FAILURE);
-    }
-
     tokens[i] = NULL; /* Add NULL as the last element to indicate the end of tokens */
-
     return (tokens);
 }
 
