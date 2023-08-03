@@ -86,7 +86,7 @@ char **get_paths(void)
 	if (pathline != NULL)
 	{
 		token = strtok(pathline, ":");
-		for (i = 2; token != NULL; i++)
+		for (i = 4; token != NULL; i++)
 		{
 			paths[i] = strdup(token);
 			token = strtok(NULL, ":");
