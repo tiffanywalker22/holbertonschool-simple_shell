@@ -157,6 +157,7 @@ char **specificPath)
 		}
 		i++;
 		free(currentArg);
+		currentArg = NULL;
 	}
 	return (command);
 }
