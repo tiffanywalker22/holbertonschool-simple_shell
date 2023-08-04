@@ -62,7 +62,7 @@ char **get_paths(char **envp)
 	char **paths = NULL;
 	char *token = NULL, *pathline = NULL;
 
-	paths = NULL;
+	paths = NULL
 	paths = (malloc(tokenSize * sizeof(char *)));
 	if (paths == NULL)
 	{
@@ -79,10 +79,10 @@ char **get_paths(char **envp)
 		&& envp[i][strlen("PATH")] == '=')
 			pathline = envp[i] + strlen("PATH") + 1;
 	}
-	paths[0] = strdup("/bin");
-	paths[1] = strdup("./");
-	paths[2] = strdup("../");
-	paths[3] = strdup("../../");
+	paths[0] = "/bin";
+	paths[1] = "/";
+	paths[2] = "../";
+	paths[3] = "../../";
 	if (pathline != NULL)
 	{
 		token = strtok(pathline, ":");
