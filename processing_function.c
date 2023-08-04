@@ -77,10 +77,10 @@ char **get_paths(char **envp)
 	{
 		if (strncmp(envp[i], "PATH", strlen("PATH")) == 0
 		&& envp[i][strlen("PATH")] == '=')
-			pathline = strdup(envp[i] + strlen("PATH") + 1);
+			pathline = envp[i] + strlen("PATH") + 1;
 	}
 	paths[0] = strdup("/bin");
-	paths[1] = strdup("/");
+	paths[1] = strdup("./");
 	paths[2] = strdup("../");
 	paths[3] = strdup("../../");
 	if (pathline != NULL)
@@ -92,9 +92,9 @@ char **get_paths(char **envp)
 			token = strtok(NULL, ":");
 		}
 	}
-	free(pathline);
 	return (paths);
 }
+
 
 
 void check_dir(int *comFlag, char **pathArray,
