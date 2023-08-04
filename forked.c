@@ -2,6 +2,7 @@
 *forkfunc - forks functions
 * @commands: new commands to input
 * @specificPath: path for current command
+* @envp: environmental variables
 * Return: returns 1 on success
 */
 
@@ -20,7 +21,7 @@ int forkfunc(char **commands, char *specificPath, char **envp)
 	strcat(cmd, specificPath);
 	strcat(cmd, "/");
 	strcat(cmd, commands[0]);
-	
+
 	pid = fork();
 	if (pid < 0)
 	{

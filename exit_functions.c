@@ -22,6 +22,7 @@ void sigintCall(int e)
  * @tokenArray: array of tokens to free
  * @buffer: frees the string buffer
  * @pathArray: frees the path array
+ * @specificPath: current path
  */
 void normalExit(char **command, char **tokenArray,
 char *buffer, char **pathArray, char *specificPath)
@@ -58,6 +59,8 @@ char *buffer, char **pathArray, char *specificPath)
  * execute_env - shows all environmental variables
  *
  * @envp: environmental variables input
+ *
+ * Return: returns 0 on success
  */
 int execute_env(char **envp)
 {
