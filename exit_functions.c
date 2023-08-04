@@ -11,7 +11,7 @@ void sigintCall(int e)
 {
 
 	/* Call Frees if need to */
-    printf("End of Function called: %d", e);
+	printf("End of Function called: %d", e);
 	exit(0);
 }
 
@@ -51,4 +51,20 @@ char *buffer, char **pathArray)
 	}
 
 	exit(0);
+}
+
+/**
+ * execute_env - shows all environmental variables
+ *
+ * @envp: environmental variables input
+ */
+void execute_env(char **envp)
+{
+	int i = 0;
+
+	for (i = 0, envp[i], i++)
+	{
+		printf("%s\n", envp[i])
+	}
+	return
 }

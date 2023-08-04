@@ -53,6 +53,7 @@ char *slash_processor(char *slasher)
 /**
 * get_paths - getting all potential paths
 *
+* @envp: environmental variables input
 * Return: returns array of strings of path
 */
 char **get_paths(char **envp)
@@ -110,7 +111,9 @@ char *currentArg, char **specificPath)
 
 			while ((entry = readdir(dir)) != NULL)
 			{
-				if (strcmp(entry->d_name, currentArg) == 0)
+				if (strcmp(entry->d_name, currentArg) == 0 ||
+				strcmp(currentArg, "exit") == 0
+				|| strcmp(currentArg, "env") == 0)
 				{
 					if (*comFlag < 1)
 						*specificPath = strdup(pathArray[j]);

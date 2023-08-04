@@ -70,6 +70,7 @@ char *get_input_non_inter(void)
  *
  * @buffer: temp storage for token
  * @flag: signal to show conditions have been met
+ * @pathArray: array of possible paths
  * Return: pointer to first token found, or NULL
  */
 char **gettokens(char *buffer, int *flag, char **pathArray)
@@ -145,4 +146,3 @@ char **argv_tokenize(int argc, char **argv)
 	tokens[argc - 1] = NULL;
 	return (tokens);
 }
-

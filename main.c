@@ -7,6 +7,7 @@
  * @argc: count of argv
  * @tokenArray: Array where each token will be stored
  * @command: Array where current command to execute will be stored
+ * @envp: environmental variables input
  */
 void argv_path(char **tokenArray, char **command,
 int argc, char **argv, char **envp)
@@ -54,6 +55,7 @@ int argc, char **argv, char **envp)
  * @tokenArray: Array where each token will be stored
  * @command: Array where current command to execute will be stored
  * @buffer: Where the input from stdin will be stored
+ * @envp: environmental variables input
  */
 void non_inter_path(char **tokenArray, char **command,
 char *buffer, char **envp)
@@ -105,6 +107,7 @@ char *buffer, char **envp)
  * @tokenArray: Array where each token will be stored
  * @command: Array where current command to execute will be stored
  * @buffer: Where the input from stdin will be stored
+ * @envp: environmental variables input
  */
 
 void interactive_path(char **tokenArray, char **command,
@@ -153,10 +156,10 @@ char *buffer, char **envp)
  * main - THIS FUNCTION FUNCTIONS
  *
  * @argc: count of arguments given
- *
  * @argv: array of arguments given
+ * @envp: environmental variables input
  *
- * Return: 0 on success?
+ * Return: 0 on success
 */
 
 int main(int argc, char **argv, char **envp)
