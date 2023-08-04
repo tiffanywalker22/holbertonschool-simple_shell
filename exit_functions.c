@@ -24,7 +24,7 @@ void sigintCall(int e)
  * @pathArray: frees the path array
  */
 void normalExit(char **command, char **tokenArray,
-char *buffer, char **pathArray)
+char *buffer, char **pathArray, char *specificPath)
 {
 	int i = 0;
 
@@ -49,6 +49,7 @@ char *buffer, char **pathArray)
 			free(pathArray[i]);
 		free(pathArray);
 	}
+	free(specificPath);
 
 	exit(0);
 }

@@ -36,7 +36,7 @@ int forkfunc(char **commands, char *specificPath, char **envp);
 char **tokenArraySub(char **array, int *counter, int *flag);
 char **get_paths(char **envp);
 void normalExit(char **command, char **tokenArray,
-char *buffer, char **pathArray);
+char *buffer, char **pathArray, char *specificPath);
 int execute_env(char **envp);
 
 #endif
