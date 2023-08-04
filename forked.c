@@ -7,15 +7,20 @@
 
 
 #include "main.h"
-int forkfunc(char **commands, char *specificPath)
+int forkfunc(char **commands, char *specificPath, char **envp)
 {
 	int pid;
 	char cmd[256] = "";
 
+	if (strcmp(commands[0], "env") == 0)
+	{
+		execute_env(envp);
+		return (0);
+	}
 	strcat(cmd, specificPath);
 	strcat(cmd, "/");
 	strcat(cmd, commands[0]);
-
+	
 	pid = fork();
 	if (pid < 0)
 	{

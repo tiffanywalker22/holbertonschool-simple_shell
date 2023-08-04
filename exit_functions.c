@@ -58,13 +58,13 @@ char *buffer, char **pathArray)
  *
  * @envp: environmental variables input
  */
-void execute_env(char **envp)
+int execute_env(char **envp)
 {
 	int i = 0;
 
-	for (i = 0, envp[i], i++)
+	for (i = 0; envp[i]; i++)
 	{
-		printf("%s\n", envp[i])
+		printf("%s\n", envp[i]);
 	}
-	return
+	return (0);
 }

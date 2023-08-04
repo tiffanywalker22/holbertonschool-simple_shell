@@ -32,11 +32,11 @@ char **get_command(char **array, int *counter,
 char **pathArray, char **specificPath);
 char **argv_tokenize(int argc, char **argv);
 void sigintCall(int e);
-int forkfunc(char **commands, char *specificPath);
+int forkfunc(char **commands, char *specificPath, char **envp);
 char **tokenArraySub(char **array, int *counter, int *flag);
 char **get_paths(char **envp);
 void normalExit(char **command, char **tokenArray,
 char *buffer, char **pathArray);
-void execute_env(char **envp);
+int execute_env(char **envp);
 
 #endif

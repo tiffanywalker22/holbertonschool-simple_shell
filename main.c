@@ -28,7 +28,7 @@ int argc, char **argv, char **envp)
 		command = get_command(tokenArray, &arrayrmcnt, pathArray, &specificPath);
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
 
-		forkfunc(command, specificPath);
+		forkfunc(command, specificPath, envp);
 
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
@@ -82,7 +82,7 @@ char *buffer, char **envp)
 		if (!command[0] || (strcmp(command[0], "exit") == 0))
 			normalExit(command, tokenArray, buffer, pathArray);
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
-		forkfunc(command, specificPath);
+		forkfunc(command, specificPath, envp);
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
 		free(command);
@@ -135,7 +135,7 @@ char *buffer, char **envp)
 		if (!command[0] || (strcmp(command[0], "exit") == 0))
 			normalExit(command, tokenArray, buffer, pathArray);
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
-		forkfunc(command, specificPath);
+		forkfunc(command, specificPath, envp);
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
 		free(command);
@@ -146,7 +146,7 @@ char *buffer, char **envp)
 			for (i = 0; tokenArray[i]; i++)
 				free(tokenArray[i]);
 			free(tokenArray);
-			newInputFlag = 0;
+			newInputFlag = 0, arrayrmcnt = 0;
 		}
 	}
 }
