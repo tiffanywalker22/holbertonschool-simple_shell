@@ -46,7 +46,7 @@ char *buffer, char **pathArray, char *specificPath)
 	}
 	if (pathArray[i])
 	{
-		for (i = 4; pathArray[i]; i++)
+		for (i = 0; pathArray[i]; i++)
 			free(pathArray[i]);
 		free(pathArray);
 	}

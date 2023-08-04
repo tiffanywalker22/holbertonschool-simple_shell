@@ -40,7 +40,7 @@ int argc, char **argv, char **envp)
 			{
 				free(tokenArray[i]);
 			}
-			for (i = 4; pathArray[i]; i++)
+			for (i = 0; pathArray[i]; i++)
 				free(pathArray[i]);
 			free(pathArray);
 			free(tokenArray);
@@ -93,7 +93,7 @@ char *buffer, char **envp)
 			for (i = 0; tokenArray[i]; i++)
 				free(tokenArray[i]);
 			free(tokenArray);
-			for (i = 4; pathArray[i]; i++)
+			for (i = 0; pathArray[i]; i++)
 				free(pathArray[i]);
 			free(pathArray);
 			exit(EXIT_SUCCESS);
@@ -143,7 +143,7 @@ char *buffer, char **envp)
 		if (flag == 0)
 		{
 			free(buffer);
-			for (i = 4; tokenArray[i]; i++)
+			for (i = 0; tokenArray[i]; i++)
 				free(tokenArray[i]);
 			free(tokenArray);
 			newInputFlag = 0, arrayrmcnt = 0;
