@@ -8,7 +8,8 @@
  * @tokenArray: Array where each token will be stored
  * @command: Array where current command to execute will be stored
  */
-void argv_path(char **tokenArray, char **command, int argc, char **argv, char **envp)
+void argv_path(char **tokenArray, char **command,
+int argc, char **argv, char **envp)
 {
 	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0;
 	char **pathArray = NULL, *specificPath = NULL;
@@ -54,7 +55,8 @@ void argv_path(char **tokenArray, char **command, int argc, char **argv, char **
  * @command: Array where current command to execute will be stored
  * @buffer: Where the input from stdin will be stored
  */
-void non_inter_path(char **tokenArray, char **command, char *buffer, char **envp)
+void non_inter_path(char **tokenArray, char **command,
+char *buffer, char **envp)
 {
 	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0;
 	char **pathArray = NULL, *specificPath = NULL;
@@ -105,7 +107,8 @@ void non_inter_path(char **tokenArray, char **command, char *buffer, char **envp
  * @buffer: Where the input from stdin will be stored
  */
 
-void interactive_path(char **tokenArray, char **command, char *buffer, char **envp)
+void interactive_path(char **tokenArray, char **command,
+char *buffer, char **envp)
 {
 	int flag = 1, i = 0, arrayrmcnt = 0, newInputFlag = 0;
 	char **pathArray = NULL, *specificPath = NULL;
