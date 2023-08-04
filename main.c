@@ -8,12 +8,12 @@
  * @tokenArray: Array where each token will be stored
  * @command: Array where current command to execute will be stored
  */
-void argv_path(char **tokenArray, char **command, int argc, char **argv)
+void argv_path(char **tokenArray, char **command, int argc, char **argv, char **envp)
 {
 	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0;
 	char **pathArray = NULL, *specificPath = NULL;
 
-	pathArray = get_paths();
+	pathArray = get_paths(envp);
 
 	while (flag)
 	{
@@ -54,12 +54,12 @@ void argv_path(char **tokenArray, char **command, int argc, char **argv)
  * @command: Array where current command to execute will be stored
  * @buffer: Where the input from stdin will be stored
  */
-void non_inter_path(char **tokenArray, char **command, char *buffer)
+void non_inter_path(char **tokenArray, char **command, char *buffer, char **envp)
 {
 	int flag = 1, i = 0, nonInterFlag = 0, arrayrmcnt = 0;
 	char **pathArray = NULL, *specificPath = NULL;
 
-	pathArray = get_paths();
+	pathArray = get_paths(envp);
 	while (flag)
 	{
 		if (nonInterFlag < 1)
@@ -105,13 +105,13 @@ void non_inter_path(char **tokenArray, char **command, char *buffer)
  * @buffer: Where the input from stdin will be stored
  */
 
-void interactive_path(char **tokenArray, char **command, char *buffer)
+void interactive_path(char **tokenArray, char **command, char *buffer, char **envp)
 {
 	int flag = 1, i = 0, arrayrmcnt = 0, newInputFlag = 0;
 	char **pathArray = NULL, *specificPath = NULL;
 
 	signal(SIGINT, sigintCall);
-	pathArray = get_paths();
+	pathArray = get_paths(envp);
 	while (true)
 	{
 		if (newInputFlag < 1)
@@ -156,7 +156,7 @@ void interactive_path(char **tokenArray, char **command, char *buffer)
  * Return: 0 on success?
 */
 
-int main(int argc, char **argv)
+int main(int argc, char **argv, char **envp)
 {
 	char *buffer = NULL;
 	char **tokenArray = NULL, **command = NULL;
@@ -164,10 +164,10 @@ int main(int argc, char **argv)
 
 	isInteractive = isatty(STDIN_FILENO);
 	if (argc > 1) /* ARGV Non-Interactive */
-		argv_path(tokenArray, command, argc, argv);
+		argv_path(tokenArray, command, argc, argv, envp);
 	else if (argc == 1 && isInteractive == 0) /* Non interactivbe */
-		non_inter_path(tokenArray, command, buffer);
+		non_inter_path(tokenArray, command, buffer, envp);
 	else /* Interactive */
-		interactive_path(tokenArray, command, buffer);
+		interactive_path(tokenArray, command, buffer, envp);
 	return (0);
 }

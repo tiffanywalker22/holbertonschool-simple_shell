@@ -55,9 +55,8 @@ char *slash_processor(char *slasher)
 *
 * Return: returns array of strings of path
 */
-char **get_paths(void)
+char **get_paths(char **envp)
 {
-	extern char **environ;
 	int i, tokenSize = 20;
 	char **paths = NULL;
 	char *token = NULL, *pathline = NULL;
@@ -73,11 +72,11 @@ char **get_paths(void)
 	{
 		paths[i] = NULL;
 	}
-	for (i = 0; environ[i] != NULL; i++)
+	for (i = 0; envp[i] != NULL; i++)
 	{
-		if (strncmp(environ[i], "PATH", strlen("PATH")) == 0
-		&& environ[i][strlen("PATH")] == '=')
-			pathline = environ[i] + strlen("PATH") + 1;
+		if (strncmp(envp[i], "PATH", strlen("PATH")) == 0
+		&& envp[i][strlen("PATH")] == '=')
+			pathline = envp[i] + strlen("PATH") + 1;
 	}
 	paths[0] = strdup("/bin");
 	paths[1] = strdup("./");

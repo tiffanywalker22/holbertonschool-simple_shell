@@ -34,7 +34,7 @@ char **argv_tokenize(int argc, char **argv);
 void sigintCall(int e);
 int forkfunc(char **commands, char *specificPath);
 char **tokenArraySub(char **array, int *counter, int *flag);
-char **get_paths(void);
+char **get_paths(char **envp);
 void normalExit(char **command, char **tokenArray,
 char *buffer, char **pathArray);
 
