@@ -10,7 +10,7 @@
 int forkfunc(char **commands, char *specificPath, char **envp)
 {
 	int pid;
-	char cmd[256] = "";
+	char cmd[1024] = "";
 
 	if (strcmp(commands[0], "env") == 0)
 	{
