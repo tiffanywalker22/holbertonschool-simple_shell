@@ -79,12 +79,12 @@ char **get_paths(char **envp)
 		&& envp[i][strlen("PATH")] == '=')
 			pathline = envp[i] + strlen("PATH") + 1;
 	}
+	paths[0] = strdup("/bin");
+	paths[1] = strdup("./");
+	paths[2] = strdup("../");
+	paths[3] = strdup("../../");
 	if (pathline != NULL)
 	{
-		paths[0] = strdup("/bin");
-		paths[1] = strdup("./");
-		paths[2] = strdup("../");
-		paths[3] = strdup("../../");
 		token = strtok(pathline, ":");
 		for (i = 4; token != NULL; i++)
 		{
@@ -92,8 +92,6 @@ char **get_paths(char **envp)
 			token = strtok(NULL, ":");
 		}
 	}
-	else
-		paths[0] = strdup("/");
 	return (paths);
 }
 
