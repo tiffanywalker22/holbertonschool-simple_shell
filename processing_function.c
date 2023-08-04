@@ -62,7 +62,7 @@ char **get_paths(char **envp)
 	char **paths = NULL;
 	char *token = NULL, *pathline = NULL;
 
-	paths = NULL
+	paths = NULL;
 	paths = (malloc(tokenSize * sizeof(char *)));
 	if (paths == NULL)
 	{
