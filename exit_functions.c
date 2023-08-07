@@ -10,7 +10,6 @@
 void sigintCall(int e)
 {
 
-	/* Call Frees if need to */
 	printf("End of Function called: %d", e);
 	exit(0);
 }
@@ -29,7 +28,7 @@ char *buffer, char **pathArray, char *specificPath)
 {
 	int i = 0;
 
-	/* Call Frees if need to */
+	/* Call Frees */
 	if (command[0])
 	{
 		for (i = 0; command[i] != NULL; i++)

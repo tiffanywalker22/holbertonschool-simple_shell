@@ -31,7 +31,7 @@ int forkfunc(char **commands, char *specificPath, char **envp)
 	else if (pid == 0)
 	{
 		/* Child process */
-		execve(cmd, commands, NULL);
+		execve(cmd, commands, envp);
 	}
 	else
 	{

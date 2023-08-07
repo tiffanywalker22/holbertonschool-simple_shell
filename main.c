@@ -21,14 +21,16 @@ int argc, char **argv, char **envp)
 	{
 		if (nonInterFlag < 1)
 		{
+			/* Tokenize argv */
 			tokenArray = argv_tokenize(argc, argv), nonInterFlag = 1;
 			flag = (argc - 1);
 		}
-
+		/* Separate Commands */
 		command = get_command(tokenArray, &arrayrmcnt, pathArray, &specificPath);
+		/* Remove Commands */
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
 
-		forkfunc(command, specificPath, envp);
+		forkfunc(command, specificPath, envp); /* Fork and execute */
 
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
@@ -68,21 +70,21 @@ char *buffer, char **envp)
 	{
 		if (nonInterFlag < 1)
 		{
-			buffer = get_input_non_inter();
+			buffer = get_input_non_inter(); /* Get buffer from stdin */
 			nonInterFlag = 1;
 			if (buffer == NULL)
-			{
-			exit(0);
-			}
-			tokenArray = gettokens(buffer, &flag, pathArray);
+				exit(0);
+			tokenArray = gettokens(buffer, &flag, pathArray); /* Tokenize */
 			if (tokenArray == NULL)
 				exit(EXIT_SUCCESS);
 		}
+		/* Separate Commands */
 		command = get_command(tokenArray, &arrayrmcnt, pathArray, &specificPath);
 		if (!command[0] || (strcmp(command[0], "exit") == 0))
 			normalExit(command, tokenArray, buffer, pathArray, specificPath);
+		/* Remove Commands */
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
-		forkfunc(command, specificPath, envp);
+		forkfunc(command, specificPath, envp); /* Fork and execute */
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
 		free(command);
@@ -123,19 +125,21 @@ char *buffer, char **envp)
 		if (newInputFlag < 1)
 		{
 			printf("%s\n", PROMPT);
-			buffer = get_input_inter();
+			buffer = get_input_inter(); /* Get buffer from stdin */
 			newInputFlag = 1;
 			if (buffer == NULL)
 				exit(0);
-			tokenArray = gettokens(buffer, &flag, pathArray);
+			tokenArray = gettokens(buffer, &flag, pathArray); /* Tokenize */
 			if (tokenArray == NULL)
 				exit(EXIT_SUCCESS);
 		}
+		/* Separate Commands */
 		command = get_command(tokenArray, &arrayrmcnt, pathArray, &specificPath);
 		if (!command[0] || (strcmp(command[0], "exit") == 0))
 			normalExit(command, tokenArray, buffer, pathArray, specificPath);
+		/* Remove Commands */
 		tokenArray = tokenArraySub(tokenArray, &arrayrmcnt, &flag);
-		forkfunc(command, specificPath, envp);
+		forkfunc(command, specificPath, envp); /* Fork and execute */
 		for (i = 0; command[i] != NULL; i++)
 			free(command[i]);
 		free(command);

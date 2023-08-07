@@ -95,7 +95,15 @@ char **get_paths(char **envp)
 	return (paths);
 }
 
-
+/**
+ * check_dir - checks each directory for existing command
+ *
+ * @comFlag: separates current commands from commands to be executed later
+ * @pathArray: Array of paths to follow to check for commands
+ * @currentArg: current command or subcommand to check for
+ * @specificPath: first path which is found to execute commands
+ *
+ */
 
 void check_dir(int *comFlag, char **pathArray,
 char *currentArg, char **specificPath)
