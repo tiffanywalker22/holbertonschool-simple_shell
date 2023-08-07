@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
-* get_input_inter - gets input for interactive
+* get_input_inter - gets input for interactive from stdin
 *
 * Return: returns input
 */
@@ -30,7 +30,7 @@ char *get_input_inter(void)
 }
 
 /**
- * get_input_non_inter - gets input from stdin
+ * get_input_non_inter - gets input from stdin, gets every line
  *
  * Return: Returns input from stdin
 */
@@ -49,6 +49,7 @@ char *get_input_non_inter(void)
 		exit(EXIT_FAILURE);
 	}
 	all_lines[0] = '\0';
+	/* Reads line by line, adds onto end of one single string (all_lines) */
 	while ((bytesRead = getline(&buffer, &buffSize, stdin)) != -1)
 	{
 		strcat(all_lines, buffer);
@@ -93,6 +94,7 @@ char **gettokens(char *buffer, int *flag, char **pathArray)
 		free(pathArray);
 		exit(0);
 	}
+	/* Copy each token into array tokens */
 	while (token != NULL)
 	{
 		tokens[i] = strdup(token), i++, *flag += 1;
